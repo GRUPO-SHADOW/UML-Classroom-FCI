@@ -6,36 +6,24 @@
 *&lt;Nome do Projeto&gt;*
 </center></font>
 
->*Observação 1: A estrutura inicial deste documento é só um exemplo. O seu grupo deverá alterar esta estrutura de acordo com o que está sendo solicitado na disciplina.*
-
->*Observação 2: O índice abaixo não precisa ser editado se você utilizar o Visual Studio Code com a extensão **Markdown All in One**. Essa extensão atualiza o índice automaticamente quando o arquivo é salvo.*
-
 **Conteúdo**
 
-- [Autores](#nome-alunos)
-- [Descrição do Projeto](#introdução-do-projeto)
-- [Análise de Requisitos Funcionais e Não-Fucionais](#descrição-dos-requisitos)
-- [Diagrama de Atividades](#diagrama-de-atividades) 
-- [Diagrama de Casos de Uso](#diagrama-de-comportamento-atores)
-- [Descrição dos Casos de Uso](#descrição-das-funcões)
-- [Diagrama de Senquencia](#diagrama-de-ordem-interações)
-- [Diagrama de Classes](#diagrama-orientado-objetos)
-- [Diagrama de Estados](#diagrama-estrutura-componente)
-- [Diagrama de Implantação](#diagrama-de-hardware-software)
+- [Autores](#autores)
+- [Descrição do Projeto](#descrição-do-projeto)
+- [Análise de Requisitos Funcionais e Não-Funcionais](#análise-de-requisitos-funcionais-e-não-funcionais)
+- [Diagrama de Atividades](#diagrama-de-atividades)
+- [Diagrama de Casos de Uso](#diagrama-de-casos-de-uso)
+- [Descrição dos Casos de Uso](#descrição-dos-casos-de-uso)
+- [Diagrama de Sequência](#diagrama-de-sequência)
+- [Diagrama de Classes](#diagrama-de-classes)
+- [Diagrama de Estados](#diagrama-de-estados)
+- [Diagrama de Implantação](#diagrama-de-implantação)
 - [Referências](#referências)
 
 
 # Autores
 
-* Aluno 1
-* Aluno 2
-* Aluno 3
-* Aluno 4
-* Aluno 5
-* Aluno 6
-* Aluno 7
-* Aluno 8
-
+* Matheus Gabriel Viana Araujo - 10420444
 
 # Descrição do Projeto
 
