@@ -30,7 +30,14 @@
 *&lt;Introdução do projeto&gt;*
 
 # Análise de Requisitos Funcionais e Não-Funcionais
-*&lt;Descrição dos requisitos&gt;*
+
+## Requisitos Funcionais
+
+Gerenciamento de frotas de drones, o controle tanto remoto quanto autônomo, e a exibição de um dashboard de telemetria em tempo real.  É essencial o sensoriamento ambiental, a detecção e evasão de ameaças, e a navegação autônoma baseada em inteligência artificial. A comunicação segura e os mecanismos de fallback em caso de perda de conexão são de extrema importância, assim como o registro detalhado de missões e logs de auditoria para garantir a rastreabilidade. A autenticação robusta de operadores via biometria e o monitoramento do sistema operacional embarcado nos drones também são necessidades primárias.
+
+## Requisitos Não Funcionais
+
+Desempenho, com baixa latência na comunicação e alta disponibilidade para operações críticas, é primordial. A segurança, com criptografia de ponta e garantia da integridade dos dados, é de suma importância. O sistema deve ser escalável para suportar um número crescente de drones, confiável para evitar falhas, e possuir uma interface usável. A infraestrutura deve garantir failover automático em caso de falha, e o banco de dados deve ser distribuído e replicado para evitar a perda de dados.
 
 # Diagrama de Atividades
 
