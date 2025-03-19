@@ -43,7 +43,14 @@ Gerenciamento de frotas de drones, o controle tanto remoto quanto autônomo, e a
 
 | ID | Título | Descrição |
 | -- | ------ | --------- |
-| RF-01 | Gerenciar frotas de drones | O sistema deve possui controle dos 
+| RF-01 | Rastreamento de frotas de drones | O sistema deve possuir controle das frotas de drone remotamente além dos próprios drones terem controle autônomo, com a exibição de um dashboard de telemetria em tempo real. |
+| RF-02 | Sensoriamento ambiental | O sistema deve ter noção espacial para desviar de ameaças |
+| RF-03 | Navegação Autônoma | O sistema deve implementar a navegação autonoma usando inteligência artificial |
+| RF-04 | Mecanismos de Fallback | O sistema deve ter mecanismos de contingência caso ocorra a perda de conexão |
+| RF-05 | Logging de Atividades | O sistema deve manter registros detalhados de missões e logs de auditoria para garantir a rastreabilidade. |
+| RF-06 | Autenticação de operadores | O sistema deve autenticar os operadores de maneira robusta usando ferramentas como biometria e autenticação multifator, além do monitoramento de atividades com o sistema operacional dos drones. |
+
+
 
 ## Requisitos Não Funcionais
 
