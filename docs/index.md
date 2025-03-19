@@ -33,11 +33,6 @@
 
 # Análise de Requisitos Funcionais e Não-Funcionais
 
-> CORRIGIR, tem que ser uma lista
-
-## Requisitos Funcionais (antigo, apagar dps)
-
-Gerenciamento de frotas de drones, o controle tanto remoto quanto autônomo, e a exibição de um dashboard de telemetria em tempo real.  É essencial o sensoriamento ambiental, a detecção e evasão de ameaças, e a navegação autônoma baseada em inteligência artificial. A comunicação segura e os mecanismos de fallback em caso de perda de conexão são de extrema importância, assim como o registro detalhado de missões e logs de auditoria para garantir a rastreabilidade. A autenticação robusta de operadores via biometria e o monitoramento do sistema operacional embarcado nos drones também são necessidades primárias.
 
 ## Requisitos Funcionais
 
@@ -50,9 +45,25 @@ Gerenciamento de frotas de drones, o controle tanto remoto quanto autônomo, e a
 | RF-05 | Logging de Atividades | O sistema deve manter registros detalhados de missões e logs de auditoria para garantir a rastreabilidade. |
 | RF-06 | Autenticação de operadores | O sistema deve autenticar os operadores de maneira robusta usando ferramentas como biometria e autenticação multifator, além do monitoramento de atividades com o sistema operacional dos drones. |
 
+## Requisitos Funcionais (antigo, apagar dps)
+
+Gerenciamento de frotas de drones, o controle tanto remoto quanto autônomo, e a exibição de um dashboard de telemetria em tempo real.  É essencial o sensoriamento ambiental, a detecção e evasão de ameaças, e a navegação autônoma baseada em inteligência artificial. A comunicação segura e os mecanismos de fallback em caso de perda de conexão são de extrema importância, assim como o registro detalhado de missões e logs de auditoria para garantir a rastreabilidade. A autenticação robusta de operadores via biometria e o monitoramento do sistema operacional embarcado nos drones também são necessidades primárias.
+
+
+
 
 
 ## Requisitos Não Funcionais
+
+| ID | Título | Descrição |
+| -- | ------ | --------- |
+| RN-01 | Desempenho | Para evitar problemas com latência o sistema deve ter um ótimo funcionamento, além da alta disponibilidade para operações críticas, o que implicaria o uso de um sistema operacional em tempo real. |
+| RN-02 | Segurança | Para garantir a integridade dos dados é importante implementar criptografia de ponta. |
+| RN-03 | Escalabilidade | O sistema deve ser dinâmico, tendo capacidade de comportar um número crescente de drones. |
+| RN-04 | Interface | Para auxiliar no uso e agilizar no funcionamento a interface deve ser intuitiva e direta |
+| RN-05 | Failover | A infraestrutura deve garantir failover automático em caso de falha, e o banco de dados deve ser distribuido e replicado para evitar a perda de dados. |
+
+## Requisitos Não Funcionais (antigo, apagar dps)
 
 Desempenho, com baixa latência na comunicação e alta disponibilidade para operações críticas. A segurança, com criptografia de ponta e garantia da integridade dos dados, é de suma importância. O sistema deve ser escalável para suportar um número crescente de drones, confiável para evitar falhas, e possuir uma interface usável. A infraestrutura deve garantir failover automático em caso de falha, e o banco de dados deve ser distribuído e replicado para evitar a perda de dados.
 
