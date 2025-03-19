@@ -24,6 +24,7 @@
 # Autores
 > Botem o nome aqui
 * Matheus Gabriel Viana Araujo - 10420444
+* Gustavo Pupke - 10426316
 
 # Descrição do Projeto
 
