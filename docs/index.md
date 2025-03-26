@@ -78,7 +78,7 @@ Desempenho, com baixa latência na comunicação e alta disponibilidade para ope
 
 # Diagrama de Atividades
 
-*&lt;Diagrama para visualizer as pessoas das áreas de negócios e de desenvolvimento de uma organização para entender o processo e comportamento.&gt;*
+![Diagrama de Atividades](./diagrama-fase2.drawio.png)
 
 # Diagrama de Casos de Uso
 
