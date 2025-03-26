@@ -78,7 +78,7 @@ Desempenho, com baixa latência na comunicação e alta disponibilidade para ope
 
 # Diagrama de Atividades
 
-![Diagrama de Atividades](./diagrama-fase2.drawio.png)
+![Diagrama de Atividades](./diagrama-atividades.drawio.png)
 
 # Diagrama de Casos de Uso
 
