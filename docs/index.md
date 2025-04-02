@@ -48,14 +48,6 @@
 | RF-07 | Gerenciamento Remoto | Permitir gerenciamento e implantação remota e segura de atualizações de software/firmware nos drones, com verificação de integridade e rollback. |
 
 
-## Requisitos Funcionais (antigo, apagar dps)
-
-Gerenciamento de frotas de drones, o controle tanto remoto quanto autônomo, e a exibição de um dashboard de telemetria em tempo real.  É essencial o sensoriamento ambiental, a detecção e evasão de ameaças, e a navegação autônoma baseada em inteligência artificial. A comunicação segura e os mecanismos de fallback em caso de perda de conexão são de extrema importância, assim como o registro detalhado de missões e logs de auditoria para garantir a rastreabilidade. A autenticação robusta de operadores via biometria e o monitoramento do sistema operacional embarcado nos drones também são necessidades primárias.
-
-
-
-
-
 ## Requisitos Não Funcionais
 
 | ID | Título | Descrição |
