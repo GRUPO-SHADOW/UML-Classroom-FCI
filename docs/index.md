@@ -22,7 +22,6 @@
 
 
 # Autores
-> Botem o nome aqui
 * Matheus Gabriel Viana Araujo - 10420444
 * Gustavo Pupke - 10426316
 * Guilherme Araujo Castro - 10427775
