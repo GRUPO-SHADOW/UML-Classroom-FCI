@@ -63,11 +63,6 @@
 | RN-09 | Facilidade de Manutenção | Sistema projetado para facilitar manutenção, monitoramento e diagnóstico de problemas, com ferramentas e alertas proativos. |
 | RN-10 | Confiabilidade de Drones | Drones e componentes projetados para alta confiabilidade e durabilidade em ambientes operacionais exigentes, com testes rigorosos e monitoramento de saúde. |
 
-## Requisitos Não Funcionais (antigo, apagar dps)
-
-Desempenho, com baixa latência na comunicação e alta disponibilidade para operações críticas. A segurança, com criptografia de ponta e garantia da integridade dos dados, é de suma importância. O sistema deve ser escalável para suportar um número crescente de drones, confiável para evitar falhas, e possuir uma interface usável. A infraestrutura deve garantir failover automático em caso de falha, e o banco de dados deve ser distribuído e replicado para evitar a perda de dados.
-
-
 # Diagrama de Atividades
 
 ![Diagrama de Atividades](./Diagrama_de_Atividades-fase2.drawio.png)
