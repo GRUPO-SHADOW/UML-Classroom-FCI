@@ -82,7 +82,7 @@ Desempenho, com baixa latência na comunicação e alta disponibilidade para ope
 
 # Diagrama de Casos de Uso
 
-*&lt;Diagrama para visualizar o comportamento dos atores&gt;*
+![Diagrama de Casos de Uso](./fase3diagrama.drawio.png)
 
 # Descrição dos Casos de Uso
 
