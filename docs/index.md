@@ -69,472 +69,229 @@ _&lt;Introdução do projeto&gt;_
 
 # Descrição dos Casos de Uso
 
-| **Nome do Caso de Uso**     | Autenticar com biometria e multiplos fatores                                                                                                                             |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **Ator Principal**          | Operador                                                                                                                                                                 |
-| **Atores Secundários**      |                                                                                                                                                                          |
-| **Resumo**                  | Operador se autentica no sistema Falcão Sombrio utilizando biometria e multiplos fatores para acesso.                                                                    |
-| **Pré-condições**           | Operador possui conta no sistema. Sistema Falcão Sombrio está disponível. Dados biométricos do operador registrados. Dispositivo de autenticação multifator configurado. |
-| **Pós-condições**           | Operador está autenticado e tem acesso às funcionalidades do sistema.                                                                                                    |
-| **FLUXO PRINCIPAL**         | **Ações do Ator**                                                                                                                                                        | **Ações do Sistema**                                                                                        |
-|                             |                                                                                                                                                                          | 1. Sistema Falcão Sombrio solicita autenticação do Operador.                                                |
-|                             | 2. Operador fornece dados biométricos.                                                                                                                                   |                                                                                                             | 3. Sistema de Autenticação Biométrica verifica dados biométricos com o registro. |
-|                             |                                                                                                                                                                          | 4. Se a verificação biométrica for bem-sucedida, o Sistema Falcão Sombrio solicita autenticação multifator. |
-|                             | 5. Operador fornece código de autenticação multifator do seu dispositivo.                                                                                                |                                                                                                             | 6. Sistema de Autenticação Multifator verifica o código de autenticação.         |
-|                             |                                                                                                                                                                          | 7. Se a verificação multifator for bem-sucedida, o Sistema Falcão Sombrio concede acesso ao Operador.       |
-| **FLUXOS ALTERNATIVOS**     | Dados biométricos incorretos fornecidos: Sistema exibe mensagem de erro e solicita nova autenticação.                                                                    |                                                                                                             |
-|                             | Autenticação multifator falha: Sistema exibe mensagem de erro e solicita nova autenticação.                                                                              |                                                                                                             |
-| **FLUXOS DE EXCEÇÃO**       | Sistema de Autenticação Biométrica indisponível: Sistema exibe mensagem de erro ao Operador e aborta o processo de autenticação.                                         |                                                                                                             |
-|                             | Sistema de Autenticação Multifator indisponível: Sistema exibe mensagem de erro ao Operador e aborta o processo de autenticação.                                         |                                                                                                             |
-| **Restrições e Validações** | O tempo para autenticação completa não pode exceder 30 segundos.                                                                                                         |                                                                                                             |
-|                             | Após 3 tentativas incorretas de autenticação, a conta do operador é bloqueada.                                                                                           |                                                                                                             |
+> Troquei a formatação pra ficar mais fácil de escrever, vejam se ficou legível...
 
-| **Nome do Caso de Uso** | Habilitar Controle Manual                                                                                                     |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| **Ator Principal**      | Operador                                                                                                                      |
-| **Atores Secundários**  | Supervisor                                                                                                                    |
-| **Resumo**              | O Operador alterna o drone do modo autônomo para o controle manual, assumindo a direção direta das operações.                 |
-| **Pré-condições**       | Operador autenticado. Drone em modo autônomo. Sistema operacional estável.                                                    |
-| **Pós-condições**       | Drone em modo manual. Controles manuais habilitados no painel do Operador.                                                    |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                             | **Ações do Sistema**                                                                 |
-|                         | 1. Operador seleciona "Controle Manual" no painel de controle.                                                                | 2. Sistema verifica a conexão de comunicação com o drone.                            |
-|                         | 3. Operador confirma a mudança de modo.                                                                                       | 4. Sistema desativa a IA de navegação e libera os controles manuais para o Operador. |
-| **FLUXOS ALTERNATIVOS** | Supervisor aprova mudança crítica (ex: em zona de risco) antes da transição para controle manual.                             |                                                                                      |
-| **FLUXOS DE EXCEÇÃO**   | Falha na conexão com o drone: Sistema exibe alerta de erro e mantém o drone em modo autônomo.                                 |                                                                                      |
-| **Restrições**          | Tempo de resposta máximo para transição: 3 segundos. Drone deve estar em altitude segura para a transição para o modo manual. |
-| **Observações**         |                                                                                                                               |
-
-| **Nome do Caso de Uso** | Navegar Automaticamente                                                                                                                                |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
-| **Ator Principal**      | Operador                                                                                                                                               |
-| **Atores Secundários**  | Nenhum                                                                                                                                                 |
-| **Resumo**              | O Operador ativa a navegação autônoma do drone, utilizando sensores e IA para seguir trajetórias pré-definidas.                                        |
-| **Pré-condições**       | Operador autenticado. Dados de sensores atualizados e válidos (LIDAR, GPS, etc.).                                                                      |
-| **Pós-condições**       | Drone em modo autônomo. Rota programada em execução.                                                                                                   |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                                      | **Ações do Sistema**                                                              |
-|                         | 1. Operador seleciona "Navegação Autônoma" no painel de controle.                                                                                      | 2. Sistema valida dados ambientais e waypoints da missão.                         |
-|                         | 3. Operador define waypoints no mapa interativo ou seleciona uma rota existente.                                                                       | 4. Sistema calcula a trajetória otimizada e inicia a navegação autônoma do drone. |
-| **FLUXOS ALTERNATIVOS** | Ajuste de rota em tempo real via telemetria e comandos do Operador.                                                                                    |                                                                                   |
-| **FLUXOS DE EXCEÇÃO**   | Dados de sensores inconsistentes ou inválidos: Sistema solicita recalibração dos sensores antes de iniciar a navegação.                                |                                                                                   |
-| **Restrições**          | Latência máxima de atualização de rota durante a navegação: 2 segundos. O sistema deve evitar automaticamente zonas restritas no planejamento da rota. |
-| **Observações**         |                                                                                                                                                        |
-
-| **Nome do Caso de Uso** | Executar Ataques                                                                                                                 |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **Ator Principal**      | Operador                                                                                                                         |
-| **Atores Secundários**  | Supervisor                                                                                                                       |
-| **Resumo**              | O Operador inicia um ataque de precisão após a validação do alvo e autorização do Supervisor.                                    |
-| **Pré-condições**       | Operador autenticado. Alvo inimigo identificado e validado. Sistema de armamento do drone carregado e pronto.                    |
-| **Pós-condições**       | Ataque concluído. Logs da missão e do ataque registrados no sistema.                                                             |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                | **Ações do Sistema**                                                                        |
-|                         | 1. Operador seleciona alvo no mapa tático.                                                                                       | 2. Sistema verifica a disponibilidade do armamento selecionado.                             |
-|                         | 3. Operador solicita autorização para engajar o alvo.                                                                            | 4. Sistema envia solicitação de autorização de ataque ao Supervisor.                        |
-|                         | 5. Supervisor aprova o ataque.                                                                                                   | 6. Sistema executa o ataque com o drone e confirma o resultado da operação para o Operador. |
-| **FLUXOS ALTERNATIVOS** | Ataque automático por IA em emergências (ex: defesa própria do drone) sem autorização do Supervisor.                             |                                                                                             |
-| **FLUXOS DE EXCEÇÃO**   | Comunicação com o drone perdida durante a execução do ataque: Sistema aborta o ataque e retorna o drone para a base.             |                                                                                             |
-| **Restrições**          | Confirmação obrigatória do Supervisor para alvos críticos. Tempo máximo de resposta para autorização do Supervisor: 10 segundos. |
-| **Observações**         |                                                                                                                                  |
+| Nome do Caso de Uso                                            | Autenticar com biometria e múltiplos fatores                                                                                                                                                             |
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ator Principal                                                | Operador                                                                                                                                                                                              |
+| Atores Secundários                                             |                                                                                                                                                                                                       |
+| Resumo                                                        | Operador se autentica no sistema Falcão Sombrio utilizando biometria e múltiplos fatores para acesso.                                                                                                     |
+| Pré-condições                                                  | Operador possui conta no sistema. Sistema Falcão Sombrio está disponível. Dados biométricos do operador registrados. Dispositivo de autenticação multifator configurado.                                |
+| Pós-condições                                                  | Operador está autenticado e tem acesso às funcionalidades do sistema.                                                                                                                                     |
+| **FLUXO PRINCIPAL**                                            |                                                                                                                                                                                                       |
+| Ações do Ator                                                 | 1. Operador fornece dados biométricos. 5. Operador fornece código de autenticação multifator do seu dispositivo.                                                                                     |
+| Ações do Sistema                                                | 1. Sistema Falcão Sombrio solicita autenticação do Operador. 3. Sistema de Autenticação Biométrica verifica dados biométricos com o registro. 4. Se a verificação biométrica for bem-sucedida, o Sistema Falcão Sombrio solicita autenticação multifator. 6. Sistema de Autenticação Multifator verifica o código de autenticação. 7. Se a verificação multifator for bem-sucedida, o Sistema Falcão Sombrio concede acesso ao Operador.          |
+| **FLUXOS ALTERNATIVOS**                                       | Dados biométricos incorretos fornecidos: Sistema exibe mensagem de erro e solicita nova autenticação. Autenticação multifator falha: Sistema exibe mensagem de erro e solicita nova autenticação. |
+| **FLUXOS DE EXCEÇÃO**                                         | Sistema de Autenticação Biométrica indisponível: Sistema exibe mensagem de erro ao Operador e aborta o processo de autenticação. Sistema de Autenticação Multifator indisponível: Sistema exibe mensagem de erro ao Operador e aborta o processo de autenticação.  |
+| Restrições e Validações                                         | O tempo para autenticação completa não pode exceder 30 segundos. Após 3 tentativas incorretas de autenticação, a conta do operador é bloqueada.                                                                                                       |
 
 
-| **Nome do Caso de Uso** | Verificar Dados Ambientais                                                                                                             |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| **Ator Principal**      | Operador                                                                                                                               |
-| **Atores Secundários**  | Supervisor                                                                                                                             |
-| **Resumo**              | O Operador valida os dados coletados por sensores (LIDAR, GPS, clima, etc.) para garantir a precisão da navegação autônoma.            |
-| **Pré-condições**       | Operador autenticado. Sensores do drone ativos e conectados. Missão em modo de planejamento.                                           |
-| **Pós-condições**       | Dados ambientais validados e marcados como válidos ou inválidos. Alertas gerados para inconsistências ou falhas nos dados.             |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                      | **Ações do Sistema**                                                                  |
-|                         | 1. Operador seleciona "Verificar Dados Ambientais" no painel de controle.                                                              | 2. Sistema coleta dados de sensores em tempo real do drone.                           |
-|                         | 3. Operador revisa métricas de qualidade dos dados (ex: precisão do LIDAR, integridade do GPS).                                        | 4. Sistema compara dados coletados com padrões pré-definidos de qualidade e precisão. |
-|                         | 5. Operador confirma a validação dos dados ambientais.                                                                                 | 6. Sistema atualiza o status dos dados ambientais da missão.                          |
-| **FLUXOS ALTERNATIVOS** | Supervisor revisa e valida dados criticamente inválidos antes de prosseguir com a missão.                                              |                                                                                       |
-| **FLUXOS DE EXCEÇÃO**   | Falha na coleta de dados de um sensor específico: Sistema notifica "Falha no sensor X" e impede a validação dos dados.                 |                                                                                       |
-| **Restrições**          | Verificação de dados deve ocorrer antes do início de qualquer missão autônoma. Tolerância de erro máxima para validação dos dados: 5%. |
-| **Observações**         |                                                                                                                                        |
+| Nome do Caso de Uso | Habilitar Controle Manual                                                                                                                                                 |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ator Principal       | Operador                                                                                                                                                                  |
+| Atores Secundários   | Supervisor                                                                                                                                                                |
+| Resumo               | O Operador alterna o drone do modo autônomo para o controle manual, assumindo a direção direta das operações.                                                                 |
+| Pré-condições        | Operador autenticado. Drone em modo autônomo. Sistema operacional estável.                                                                                                |
+| Pós-condições        | Drone em modo manual. Controles manuais habilitados no painel do Operador.                                                                                                |
+| **FLUXO PRINCIPAL**  |                                                                                                                                                                         |
+| Ações do Ator       | 1. Operador seleciona "Controle Manual" no painel de controle. 3. Operador confirma a mudança de modo.                                                                |
+| Ações do Sistema      | 2. Sistema verifica a conexão de comunicação com o drone. 4. Sistema desativa a IA de navegação e libera os controles manuais para o Operador.                         |
+| **FLUXOS ALTERNATIVOS** | Supervisor aprova mudança crítica (ex: em zona de risco) antes da transição para controle manual.                                                                               |
+| **FLUXOS DE EXCEÇÃO**   | Falha na conexão com o drone: Sistema exibe alerta de erro e mantém o drone em modo autônomo.                                                                           |
+| Restrições           | Tempo de resposta máximo para transição: 3 segundos. Drone deve estar em altitude segura para a transição para o modo manual.                                           |
+| Observações          |                                                                                                                                                                         |
 
 
-
-| **Nome do Caso de Uso** | Registrar Missões                                                                                                                          |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| **Ator Principal**      | Operador                                                                                                                                   |
-| **Atores Secundários**  | Supervisor                                                                                                                                 |
-| **Resumo**              | O Operador define e registra novas missões, incluindo objetivos, rotas, parâmetros de segurança e restrições.                              |
-| **Pré-condições**       | Operador autenticado. Dados ambientais validados para a área da missão. Drones disponíveis e em estado operacional.                        |
-| **Pós-condições**       | Missão registrada no banco de dados. Drones programados e prontos para executar a missão.                                                  |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                          | **Ações do Sistema**                                                                         |
-|                         | 1. Operador seleciona "Nova Missão" no painel de controle.                                                                                 | 2. Sistema exibe formulário de configuração de nova missão.                                  |
-|                         | 3. Operador insere detalhes da missão (alvos, waypoints, parâmetros de voo).                                                               | 4. Sistema verifica conflitos da missão com zonas restritas ou restrições operacionais.      |
-|                         | 5. Operador salva a missão.                                                                                                                | 6. Sistema armazena dados da missão no banco de dados e sincroniza com os drones designados. |
-| **FLUXOS ALTERNATIVOS** | Missões de alto risco ou em áreas sensíveis exigem aprovação prévia do Supervisor antes do registro.                                       |                                                                                              |
-| **FLUXOS DE EXCEÇÃO**   | Waypoints inválidos ou rota não segura: Sistema bloqueia o salvamento da missão até que os erros sejam corrigidos.                         |                                                                                              |
-| **Restrições**          | Missões devem incluir pelo menos 3 waypoints para definir uma rota válida. Nome da missão deve ser único no sistema para evitar conflitos. |
-| **Observações**         |                                                                                                                                            |
+| Nome do Caso de Uso  | Navegar Automaticamente                                                                                                                                    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Ator Principal       | Operador                                                                                                                                               |
+| Atores Secundários   | Nenhum                                                                                                                                                 |
+| Resumo               | O Operador ativa a navegação autônoma do drone, utilizando sensores e IA para seguir trajetórias pré-definidas.                                        |
+| Pré-condições        | Operador autenticado. Dados de sensores atualizados e válidos (LIDAR, GPS, etc.).                                                                      |
+| Pós-condições        | Drone em modo autônomo. Rota programada em execução.                                                                                                   |
+| **FLUXO PRINCIPAL**  |                                                                                                                                                        |
+| Ações do Ator       | 1. Operador seleciona "Navegação Autônoma" no painel de controle. 3. Operador define waypoints no mapa interativo ou seleciona uma rota existente. |
+| Ações do Sistema      | 2. Sistema valida dados ambientais e waypoints da missão. 4. Sistema calcula a trajetória otimizada e inicia a navegação autônoma do drone.    |
+| **FLUXOS ALTERNATIVOS** | Ajuste de rota em tempo real via telemetria e comandos do Operador.                                                                                    |
+| **FLUXOS DE EXCEÇÃO**   | Dados de sensores inconsistentes ou inválidos: Sistema solicita recalibração dos sensores antes de iniciar a navegação.                                |
+| Restrições           | Latência máxima de atualização de rota durante a navegação: 2 segundos. O sistema deve evitar automaticamente zonas restritas no planejamento da rota. |
+| Observações          |                                                                                                                                                        |
 
 
-
-| **Nome do Caso de Uso** | Consultar Versão Atual                                                                                                             |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Ator Principal**      | Operador                                                                                                                           |
-| **Atores Secundários**  | Supervisor                                                                                                                         |
-| **Resumo**              | O Operador ou Supervisor verifica a versão instalada do software e firmware dos drones e do sistema de controle.                   |
-| **Pré-condições**       | Usuário autenticado no sistema. Sistema operacional do painel de controle estável.                                                 |
-| **Pós-condições**       | Versão atual do software e firmware exibida no painel de controle.                                                                 |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                  | **Ações do Sistema**                                                      |
-|                         | 1. Operador seleciona "Sobre o Sistema" no menu de configurações.                                                                  | 2. Sistema acessa dados de versão do software e firmware dos componentes. |
-|                         | 3. Operador visualiza detalhes da versão (ex: v2.1.5, build 1234).                                                                 | 4. Sistema exibe histórico de atualizações recentes para referência.      |
-| **FLUXOS ALTERNATIVOS** | Supervisor exporta relatório de versões para fins de auditoria e conformidade.                                                     |                                                                           |
-| **FLUXOS DE EXCEÇÃO**   | Dados de versão não encontrados ou corrompidos: Sistema solicita reinicialização do módulo afetado.                                |                                                                           |
-| **Restrições**          | Acesso restrito a usuários autorizados (Operador e Supervisor). Atualizações pendentes devem ser destacadas visualmente no painel. |
-| **Observações**         |                                                                                                                                    |
-
-
-| **Nome do Caso de Uso** | Atualizar para Novas Versões                                                                                                                                     |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Ator Principal**      | Operador                                                                                                                                                         |
-| **Atores Secundários**  | Supervisor                                                                                                                                                       |
-| **Resumo**              | O Operador aplica atualizações de software ou firmware nos drones e servidores de controle, garantindo compatibilidade e estabilidade.                           |
-| **Pré-condições**       | Operador autenticado. Conexão estável com o servidor de atualizações. Backup completo do sistema realizado antes da atualização.                                 |
-| **Pós-condições**       | Nova versão do software/firmware instalada e operacional. Logs de atualização detalhados registrados para auditoria.                                             |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                                                | **Ações do Sistema**                                                                                             |
-|                         | 1. Operador seleciona "Verificar Atualizações" no painel de controle.                                                                                            | 2. Sistema busca e lista novas versões disponíveis no servidor de atualizações.                                  |
-|                         | 3. Operador inicia o processo de instalação da atualização.                                                                                                      | 4. Sistema valida a integridade dos arquivos de atualização e aplica a atualização nos componentes selecionados. |
-| **FLUXOS ALTERNATIVOS** | Atualização crítica: Requer confirmação e aprovação do Supervisor antes da instalação ser iniciada.                                                              |                                                                                                                  |
-| **FLUXOS DE EXCEÇÃO**   | Falha na validação da integridade dos arquivos: Sistema reverte automaticamente para a versão anterior estável.                                                  |                                                                                                                  |
-| **Restrições**          | Atualizações só podem ser aplicadas fora de missões ativas para evitar interrupções. Janela de tempo máxima para concluir o processo de atualização: 15 minutos. |
-| **Observações**         |                                                                                                                                                                  |
+| Nome do Caso de Uso | Executar Ataques                                                                                                     |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Ator Principal       | Operador                                                                                                             |
+| Atores Secundários   | Supervisor                                                                                                           |
+| Resumo               | O Operador inicia um ataque de precisão após a validação do alvo e autorização do Supervisor.                       |
+| Pré-condições        | Operador autenticado. Alvo inimigo identificado e validado. Sistema de armamento do drone carregado e pronto.      |
+| Pós-condições        | Ataque concluído. Logs da missão e do ataque registrados no sistema.                                                |
+| **FLUXO PRINCIPAL**  |                                                                                                                    |
+| Ações do Ator       | 1. Operador seleciona alvo no mapa tático. 3. Operador solicita autorização para engajar o alvo. 5. Supervisor aprova o ataque. |
+| Ações do Sistema      | 2. Sistema verifica a disponibilidade do armamento selecionado. 4. Sistema envia solicitação de autorização de ataque ao Supervisor. 6. Sistema executa o ataque com o drone e confirma o resultado da operação para o Operador. |
+| **FLUXOS ALTERNATIVOS** | Ataque automático por IA em emergências (ex: defesa própria do drone) sem autorização do Supervisor.                           |
+| **FLUXOS DE EXCEÇÃO**   | Comunicação com o drone perdida durante a execução do ataque: Sistema aborta o ataque e retorna o drone para a base.           |
+| Restrições           | Confirmação obrigatória do Supervisor para alvos críticos. Tempo máximo de resposta para autorização do Supervisor: 10 segundos. |
+| Observações          |                                                                                                                    |
 
 
-
-| **Nome do Caso de Uso** | Restaurar Versão Anterior                                                                                                                                        |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **Ator Principal**      | Operador                                                                                                                                                         |
-| **Atores Secundários**  | Supervisor                                                                                                                                                       |
-| **Resumo**              | O Operador reverte o sistema para uma versão estável anterior em caso de falha na atualização ou instabilidade do sistema.                                       |
-| **Pré-condições**       | Operador autenticado. Backup da versão anterior disponível e íntegro. Sistema em modo de recuperação ou manutenção.                                              |
-| **Pós-condições**       | Versão anterior do software/firmware restaurada e funcional. Logs de restauração detalhados registrados para auditoria.                                          |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                                                | **Ações do Sistema**                                                                        |
-|                         | 1. Operador seleciona "Histórico de Versões" ou "Restaurar Versão Anterior" no painel.                                                                           | 2. Sistema lista as versões anteriores estáveis disponíveis para restauração.               |
-|                         | 3. Operador escolhe uma versão para restaurar e confirma a ação.                                                                                                 | 4. Sistema reinstala a versão selecionada e reinicia os serviços e componentes necessários. |
-| **FLUXOS ALTERNATIVOS** | Restauração emergencial: Supervisor pode iniciar o processo de restauração remotamente sem confirmação do Operador em casos críticos.                            |                                                                                             |
-| **FLUXOS DE EXCEÇÃO**   | Backup da versão anterior corrompido ou inacessível: Sistema notifica o erro e aborta o processo de restauração.                                                 |                                                                                             |
-| **Restrições**          | Restauração bloqueada durante missões críticas para garantir a segurança operacional. Máximo de 3 restaurações por dia para evitar ciclos contínuos de rollback. |
-| **Observações**         |                                                                                                                                                                  |
-
+| Nome do Caso de Uso | Verificar Dados Ambientais                                                                                                                   |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ator Principal       | Operador                                                                                                                                       |
+| Atores Secundários   | Supervisor                                                                                                                                     |
+| Resumo               | O Operador valida os dados coletados por sensores (LIDAR, GPS, clima, etc.) para garantir a precisão da navegação autônoma.                    |
+| Pré-condições        | Operador autenticado. Sensores do drone ativos e conectados. Missão em modo de planejamento.                                                  |
+| Pós-condições        | Dados ambientais validados e marcados como válidos ou inválidos. Alertas gerados para inconsistências ou falhas nos dados.                    |
+| **FLUXO PRINCIPAL**  |                                                                                                                                              |
+| Ações do Ator       | 1. Operador seleciona "Verificar Dados Ambientais" no painel de controle. 3. Operador revisa métricas de qualidade dos dados (ex: precisão do LIDAR, integridade do GPS). 5. Operador confirma a validação dos dados ambientais.   |
+| Ações do Sistema      | 2. Sistema coleta dados de sensores em tempo real do drone. 4. Sistema compara dados coletados com padrões pré-definidos de qualidade e precisão.  6. Sistema atualiza o status dos dados ambientais da missão. |
+| **FLUXOS ALTERNATIVOS** | Supervisor revisa e valida dados criticamente inválidos antes de prosseguir com a missão.                                                       |
+| **FLUXOS DE EXCEÇÃO**   | Falha na coleta de dados de um sensor específico: Sistema notifica "Falha no sensor X" e impede a validação dos dados.                               |
+| Restrições           | Verificação de dados deve ocorrer antes do início de qualquer missão autônoma. Tolerância de erro máxima para validação dos dados: 5%.         |
+| Observações          |                                                                                                                                              |
 
 
-| **Nome do Caso de Uso** | Administrar Banco de Dados                                                                                                                                        |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| **Ator Principal**      | Supervisor                                                                                                                                                        |
-| **Atores Secundários**  | Nenhum                                                                                                                                                            |
-| **Resumo**              | O Supervisor realiza operações de manutenção no banco de dados, como backup, otimização, limpeza e auditoria de registros.                                        |
-| **Pré-condições**       | Supervisor autenticado. Sistema fora de horário de pico de operações para minimizar o impacto. Permissões administrativas de acesso ao banco de dados concedidas. |
-| **Pós-condições**       | Banco de dados otimizado, backup gerado ou registros auditados. Logs de operação de administração do banco de dados registrados.                                  |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                                                 | **Ações do Sistema**                                                                                 |
-|                         | 1. Supervisor seleciona "Gerenciar Banco de Dados" no painel administrativo.                                                                                      | 2. Sistema exibe opções de administração do banco de dados (backup, limpeza, otimização, auditoria). |
-|                         | 3. Supervisor escolhe a ação desejada e configura os parâmetros necessários.                                                                                      | 4. Sistema executa a operação de administração e confirma o resultado para o Supervisor.             |
-| **FLUXOS ALTERNATIVOS** | Backup automático: Agendamento periódico de backups do banco de dados sem intervenção manual do Supervisor.                                                       |                                                                                                      |
-| **FLUXOS DE EXCEÇÃO**   | Falha na execução da operação: Sistema notifica o Supervisor e gera um relatório de erro detalhado.                                                               |                                                                                                      |
-| **Restrições**          | Operações de administração bloqueadas durante processos de atualização do sistema. Limite de 1TB para backups manuais para garantir o desempenho do sistema.      |
-| **Observações**         |                                                                                                                                                                   |
+| Nome do Caso de Uso | Registrar Missões                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Ator Principal       | Operador                                                                                                               |
+| Atores Secundários   | Supervisor                                                                                                             |
+| Resumo               | O Operador define e registra novas missões, incluindo objetivos, rotas, parâmetros de segurança e restrições.          |
+| Pré-condições        | Operador autenticado. Dados ambientais validados para a área da missão. Drones disponíveis e em estado operacional.    |
+| Pós-condições        | Missão registrada no banco de dados. Drones programados e prontos para executar a missão.                               |
+| **FLUXO PRINCIPAL**  |                                                                                                                        |
+| Ações do Ator       | 1. Operador seleciona "Nova Missão" no painel de controle. 3. Operador insere detalhes da missão (alvos, waypoints, parâmetros de voo). 5. Operador salva a missão.  |
+| Ações do Sistema      | 2. Sistema exibe formulário de configuração de nova missão. 4. Sistema verifica conflitos da missão com zonas restritas ou restrições operacionais. 6. Sistema armazena dados da missão no banco de dados e sincroniza com os drones designados. |
+| **FLUXOS ALTERNATIVOS** | Missões de alto risco ou em áreas sensíveis exigem aprovação prévia do Supervisor antes do registro.                     |
+| **FLUXOS DE EXCEÇÃO**   | Waypoints inválidos ou rota não segura: Sistema bloqueia o salvamento da missão até que os erros sejam corrigidos.      |
+| Restrições           | Missões devem incluir pelo menos 3 waypoints para definir uma rota válida. Nome da missão deve ser único no sistema para evitar conflitos. |
+| Observações          |                                                                                                                        |
 
 
-| **Nome do Caso de Uso** | Realizar Manutenção                                                                                                                                                                     |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| **Ator Principal**      | Operador                                                                                                                                                                                |
-| **Atores Secundários**  | Supervisor                                                                                                                                                                              |
-| **Resumo**              | O Operador executa procedimentos de manutenção preventiva ou corretiva em drones e servidores do sistema.                                                                               |
-| **Pré-condições**       | Operador autenticado. Sistema em modo de manutenção para evitar operações não planejadas. Ferramentas de diagnóstico e manutenção disponíveis.                                          |
-| **Pós-condições**       | Componentes verificados, reparados ou substituídos. Logs de manutenção detalhados e atualizados no sistema.                                                                             |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                                                                       | **Ações do Sistema**                                                                       |
-|                         | 1. Operador seleciona "Modo Manutenção" no painel de controle.                                                                                                                          | 2. Sistema desativa funções críticas operacionais e libera acesso técnico para manutenção. |
-|                         | 3. Operador realiza diagnósticos, testes ou ajustes nos componentes.                                                                                                                    | 4. Sistema registra todas as alterações realizadas e gera um relatório de manutenção.      |
-| **FLUXOS ALTERNATIVOS** | Manutenção crítica: Requer aprovação prévia do Supervisor para intervenções que possam afetar a segurança ou disponibilidade do sistema.                                                |                                                                                            |
-| **FLUXOS DE EXCEÇÃO**   | Falha no diagnóstico: Sistema notifica o Operador e sugere procedimentos de diagnóstico alternativos ou escalonamento para suporte técnico.                                             |                                                                                            |
-| **Restrições**          | Modo de manutenção bloqueado durante missões ativas para garantir a continuidade operacional. Tempo máximo por sessão de manutenção para garantir a disponibilidade do sistema: 1 hora. |
-| **Observações**         |                                                                                                                                                                                         |
+| Nome do Caso de Uso | Consultar Versão Atual                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Ator Principal       | Operador                                                                                                     |
+| Atores Secundários   | Supervisor                                                                                                   |
+| Resumo               | O Operador ou Supervisor verifica a versão instalada do software e firmware dos drones e do sistema de controle. |
+| Pré-condições        | Usuário autenticado no sistema. Sistema operacional do painel de controle estável.                              |
+| Pós-condições        | Versão atual do software e firmware exibida no painel de controle.                                              |
+| **FLUXO PRINCIPAL**  |                                                                                                              |
+| Ações do Ator       | 1. Operador seleciona "Sobre o Sistema" no menu de configurações. 3. Operador visualiza detalhes da versão (ex: v2.1.5, build 1234).  |
+| Ações do Sistema      | 2. Sistema acessa dados de versão do software e firmware dos componentes. 4. Sistema exibe histórico de atualizações recentes para referência. |
+| **FLUXOS ALTERNATIVOS** | Supervisor exporta relatório de versões para fins de auditoria e conformidade.                                 |
+| **FLUXOS DE EXCEÇÃO**   | Dados de versão não encontrados ou corrompidos: Sistema solicita reinicialização do módulo afetado.               |
+| Restrições           | Acesso restrito a usuários autorizados (Operador e Supervisor). Atualizações pendentes devem ser destacadas visualmente no painel. |
+| Observações          |                                                                                                              |
 
 
-
-| **Nome do Caso de Uso** | Monitorar Sistema                                                                                                                                                                              |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **Ator Principal**      | Operador                                                                                                                                                                                       |
-| **Atores Secundários**  | Supervisor                                                                                                                                                                                     |
-| **Resumo**              | O Operador acompanha em tempo real o status operacional de drones, servidores, rede de comunicação e outros componentes do sistema, identificando anomalias e eventos críticos.                |
-| **Pré-condições**       | Operador autenticado. Sistema operacional estável e em funcionamento. Sensores e módulos de monitoramento ativos.                                                                              |
-| **Pós-condições**       | Alertas gerados para eventos críticos ou anomalias detectadas. Dashboard de monitoramento atualizado continuamente com métricas e status dos componentes.                                      |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                                                                              | **Ações do Sistema**                                                                              |
-|                         | 1. Operador acessa o dashboard de monitoramento no painel de controle.                                                                                                                         | 2. Sistema exibe status em tempo real de drones, servidores, latência da rede e carga do sistema. |
-|                         | 3. Operador configura alertas personalizados para métricas específicas de monitoramento.                                                                                                       | 4. Sistema notifica o Operador em tempo real sobre desvios ou eventos críticos detectados.        |
-| **FLUXOS ALTERNATIVOS** | Monitoramento remoto: Supervisor pode visualizar dados de monitoramento de qualquer local autorizado através de uma interface web.                                                             |                                                                                                   |
-| **FLUXOS DE EXCEÇÃO**   | Perda de conexão com um componente monitorado: Sistema armazena dados localmente e tenta reconectar, notificando o Operador sobre a perda temporária de dados.                                 |                                                                                                   |
-| **Restrições**          | Taxa de atualização de dados no dashboard: a cada 2 segundos para garantir monitoramento em tempo real. Histórico de dados de monitoramento limitado a 48 horas para otimizar o armazenamento. |
-| **Observações**         |                                                                                                                                                                                                |
-
+| Nome do Caso de Uso | Atualizar para Novas Versões                                                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Ator Principal       | Operador                                                                                                                                         |
+| Atores Secundários   | Supervisor                                                                                                                                       |
+| Resumo               | O Operador aplica atualizações de software ou firmware nos drones e servidores de controle, garantindo compatibilidade e estabilidade.         |
+| Pré-condições        | Operador autenticado. Conexão estável com o servidor de atualizações. Backup completo do sistema realizado antes da atualização.               |
+| Pós-condições        | Nova versão do software/firmware instalada e operacional. Logs de atualização detalhados registrados para auditoria.                             |
+| **FLUXO PRINCIPAL**  |                                                                                                                                                |
+| Ações do Ator       | 1. Operador seleciona "Verificar Atualizações" no painel de controle. 3. Operador inicia o processo de instalação da atualização.            |
+| Ações do Sistema      | 2. Sistema busca e lista novas versões disponíveis no servidor de atualizações. 4. Sistema valida a integridade dos arquivos de atualização e aplica a atualização nos componentes selecionados. |
+| **FLUXOS ALTERNATIVOS** | Atualização crítica: Requer confirmação e aprovação do Supervisor antes da instalação ser iniciada.                                             |
+| **FLUXOS DE EXCEÇÃO**   | Falha na validação da integridade dos arquivos: Sistema reverte automaticamente para a versão anterior estável.                                |
+| Restrições           | Atualizações só podem ser aplicadas fora de missões ativas para evitar interrupções. Janela de tempo máxima para concluir o processo de atualização: 15 minutos. |
+| Observações          |                                                                                                                                                |
 
 
-| **Nome do Caso de Uso** | Gerar Relatório do Sistema                                                                                                                               |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| **Ator Principal**      | Operador                                                                                                                                                 |
-| **Atores Secundários**  | Supervisor                                                                                                                                               |
-| **Resumo**              | O Operador cria relatórios detalhados sobre missões, desempenho do sistema, falhas e auditoria para análise e conformidade.                              |
-| **Pré-condições**       | Operador autenticado. Dados históricos de missões e eventos do sistema disponíveis. Missões concluídas e registradas no sistema.                         |
-| **Pós-condições**       | Relatório gerado e exportado em formato padrão (PDF/CSV). Registro da geração do relatório nos logs de auditoria do sistema.                             |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                                        | **Ações do Sistema**                                                                                |
-|                         | 1. Operador seleciona "Gerar Relatório" no menu de relatórios.                                                                                           | 2. Sistema lista os tipos de relatórios disponíveis (missões, desempenho, auditoria, etc.).         |
-|                         | 3. Operador define o período de tempo e parâmetros específicos para o relatório.                                                                         | 4. Sistema compila os dados, gera o relatório e disponibiliza para download no formato selecionado. |
-| **FLUXOS ALTERNATIVOS** | Relatório automático: Agendamento periódico de geração e envio de relatórios por e-mail sem intervenção manual.                                          |                                                                                                     |
-| **FLUXOS DE EXCEÇÃO**   | Dados insuficientes para o período selecionado: Sistema notifica o Operador e sugere ajustes no período ou parâmetros do relatório.                      |                                                                                                     |
-| **Restrições**          | Limite de 500 páginas por relatório para garantir a performance na geração. Exportação de relatórios bloqueada durante atualizações críticas do sistema. |
-| **Observações**         |                                                                                                                                                          |
-
-
-
-| **Nome do Caso de Uso** | Gerar Atualizações para o Software                                                                                                                                           |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| **Ator Principal**      | Supervisor                                                                                                                                                                   |
-| **Atores Secundários**  | Equipe de Desenvolvimento                                                                                                                                                    |
-| **Resumo**              | O Supervisor coordena a criação, validação e disponibilização de novas versões de software/firmware para o sistema.                                                          |
-| **Pré-condições**       | Supervisor autenticado com permissões administrativas. Ambiente de desenvolvimento configurado e funcional. Testes unitários e de integração da nova versão concluídos.      |
-| **Pós-condições**       | Pacote de atualização gerado, assinado digitalmente e disponibilizado no servidor de atualizações. Documentação técnica da nova versão atualizada e publicada.               |
-| **FLUXO PRINCIPAL**     | **Ações do Ator**                                                                                                                                                            | **Ações do Sistema**                                                                                     |
-|                         | 1. Supervisor aprova o código-fonte da nova versão após revisão.                                                                                                             | 2. Sistema compila o código-fonte e empacota os arquivos da nova versão.                                 |
-|                         | 3. Supervisor valida a nova versão em ambiente de teste (staging).                                                                                                           | 4. Sistema registra a nova versão no catálogo de atualizações e libera para distribuição aos Operadores. |
-| **FLUXOS ALTERNATIVOS** | Atualizações emergenciais para correção de falhas críticas com processo de teste e validação reduzido.                                                                       |                                                                                                          |
-| **FLUXOS DE EXCEÇÃO**   | Erro na compilação: Sistema gera log detalhado do erro para a equipe de desenvolvimento para correção.                                                                       |                                                                                                          |
-| **Restrições**          | Versões devem seguir um padrão semântico de versionamento (ex: vX.Y.Z). Pacotes de atualização devem ser assinados digitalmente para garantir a integridade e autenticidade. |
-| **Observações**         |                                                                                                                                                                              |
-
-> TESTEEEEEEEEEEEEEEEEEEEEEEEEEEEE TA BUGADO A FORMATAÇÃO N SEI OQ FAZER JÁ É 00:00
-
-### Autenticar com Biometria e Múltiplos Fatores
-
-| **Nome do Caso de Uso** | Autenticar com biometria e múltiplos fatores |
-|-------------------------|---------------------------------------------|
-| **Ator Principal**      | Operador                                    |
-| **Atores Secundários**  | Nenhum                                      |
-| **Resumo**              | Operador se autentica no sistema Falcão Sombrio utilizando biometria e múltiplos fatores para acesso. |
-| **Pré-condições**       | Operador possui conta no sistema. Sistema Falcão Sombrio está disponível. Dados biométricos do operador registrados. Dispositivo de autenticação multifator configurado. |
-| **Pós-condições**       | Operador está autenticado e tem acesso às funcionalidades do sistema. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         |                   | 1. Sistema Falcão Sombrio solicita autenticação do Operador. |
-|                         | 2. Operador fornece dados biométricos. | 3. Sistema de Autenticação Biométrica verifica dados biométricos com o registro. |
-|                         |                   | 4. Se a verificação biométrica for bem-sucedida, o Sistema Falcão Sombrio solicita autenticação multifator. |
-|                         | 5. Operador fornece código de autenticação multifator do seu dispositivo. | 6. Sistema de Autenticação Multifator verifica o código de autenticação. |
-|                         |                   | 7. Se a verificação multifator for bem-sucedida, o Sistema Falcão Sombrio concede acesso ao Operador. |
-| **FLUXOS ALTERNATIVOS** | Dados biométricos incorretos fornecidos: Sistema exibe mensagem de erro e solicita nova autenticação. |
-| **FLUXOS DE EXCEÇÃO**   | Sistema de Autenticação Biométrica indisponível: Sistema exibe mensagem de erro ao Operador e aborta o processo de autenticação. |
-| **Restrições e Validações** | O tempo para autenticação completa não pode exceder 30 segundos. Após 3 tentativas incorretas de autenticação, a conta do operador é bloqueada. |
-
-### Habilitar Controle Manual
-
-| **Nome do Caso de Uso** | Habilitar Controle Manual |
-|-------------------------|---------------------------|
-| **Ator Principal**      | Operador                  |
-| **Atores Secundários**  | Supervisor                |
-| **Resumo**              | O Operador alterna o drone do modo autônomo para o controle manual, assumindo a direção direta das operações. |
-| **Pré-condições**       | Operador autenticado. Drone em modo autônomo. Sistema operacional estável. |
-| **Pós-condições**       | Drone em modo manual. Controles manuais habilitados no painel do Operador. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Operador seleciona "Controle Manual" no painel de controle. | 2. Sistema verifica a conexão de comunicação com o drone. |
-|                         | 3. Operador confirma a mudança de modo. | 4. Sistema desativa a IA de navegação e libera os controles manuais para o Operador. |
-| **FLUXOS ALTERNATIVOS** | Supervisor aprova mudança crítica (ex: em zona de risco) antes da transição para controle manual. |
-| **FLUXOS DE EXCEÇÃO**   | Falha na conexão com o drone: Sistema exibe alerta de erro e mantém o drone em modo autônomo. |
-| **Restrições**          | Tempo de resposta máximo para transição: 3 segundos. Drone deve estar em altitude segura para a transição para o modo manual. |
-
-### Navegar Automaticamente
-
-| **Nome do Caso de Uso** | Navegar Automaticamente |
-|-------------------------|-------------------------|
-| **Ator Principal**      | Operador                |
-| **Atores Secundários**  | Nenhum                  |
-| **Resumo**              | O Operador ativa a navegação autônoma do drone, utilizando sensores e IA para seguir trajetórias pré-definidas. |
-| **Pré-condições**       | Operador autenticado. Dados de sensores atualizados e válidos (LIDAR, GPS, etc.). |
-| **Pós-condições**       | Drone em modo autônomo. Rota programada em execução. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Operador seleciona "Navegação Autônoma" no painel de controle. | 2. Sistema valida dados ambientais e waypoints da missão. |
-|                         | 3. Operador define waypoints no mapa interativo ou seleciona uma rota existente. | 4. Sistema calcula a trajetória otimizada e inicia a navegação autônoma do drone. |
-| **FLUXOS ALTERNATIVOS** | Ajuste de rota em tempo real via telemetria e comandos do Operador. |
-| **FLUXOS DE EXCEÇÃO**   | Dados de sensores inconsistentes ou inválidos: Sistema solicita recalibração dos sensores antes de iniciar a navegação. |
-| **Restrições**          | Latência máxima de atualização de rota durante a navegação: 2 segundos. O sistema deve evitar automaticamente zonas restritas no planejamento da rota. |
-
-### Executar Ataques
-
-| **Nome do Caso de Uso** | Executar Ataques |
-|-------------------------|------------------|
-| **Ator Principal**      | Operador         |
-| **Atores Secundários**  | Supervisor       |
-| **Resumo**              | O Operador inicia um ataque de precisão após a validação do alvo e autorização do Supervisor. |
-| **Pré-condições**       | Operador autenticado. Alvo inimigo identificado e validado. Sistema de armamento do drone carregado e pronto. |
-| **Pós-condições**       | Ataque concluído. Logs da missão e do ataque registrados no sistema. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Operador seleciona alvo no mapa tático. | 2. Sistema verifica a disponibilidade do armamento selecionado. |
-|                         | 3. Operador solicita autorização para engajar o alvo. | 4. Sistema envia solicitação de autorização de ataque ao Supervisor. |
-|                         | 5. Supervisor aprova o ataque. | 6. Sistema executa o ataque com o drone e confirma o resultado da operação para o Operador. |
-| **FLUXOS ALTERNATIVOS** | Ataque automático por IA em emergências (ex: defesa própria do drone) sem autorização do Supervisor. |
-| **FLUXOS DE EXCEÇÃO**   | Comunicação com o drone perdida durante a execução do ataque: Sistema aborta o ataque e retorna o drone para a base. |
-| **Restrições**          | Confirmação obrigatória do Supervisor para alvos críticos. Tempo máximo de resposta para autorização do Supervisor: 10 segundos. |
-
-### Verificar Dados Ambientais
-
-| **Nome do Caso de Uso** | Verificar Dados Ambientais |
-|-------------------------|----------------------------|
-| **Ator Principal**      | Operador                   |
-| **Atores Secundários**  | Supervisor                 |
-| **Resumo**              | O Operador valida os dados coletados por sensores (LIDAR, GPS, clima, etc.) para garantir a precisão da navegação autônoma. |
-| **Pré-condições**       | Operador autenticado. Sensores do drone ativos e conectados. Missão em modo de planejamento. |
-| **Pós-condições**       | Dados ambientais validados e marcados como válidos ou inválidos. Alertas gerados para inconsistências ou falhas nos dados. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Operador seleciona "Verificar Dados Ambientais" no painel de controle. | 2. Sistema coleta dados de sensores em tempo real do drone. |
-|                         | 3. Operador revisa métricas de qualidade dos dados (ex: precisão do LIDAR, integridade do GPS). | 4. Sistema compara dados coletados com padrões pré-definidos de qualidade e precisão. |
-|                         | 5. Operador confirma a validação dos dados ambientais. | 6. Sistema atualiza o status dos dados ambientais da missão. |
-| **FLUXOS ALTERNATIVOS** | Supervisor revisa e valida dados criticamente inválidos antes de prosseguir com a missão. |
-| **FLUXOS DE EXCEÇÃO**   | Falha na coleta de dados de um sensor específico: Sistema notifica "Falha no sensor X" e impede a validação dos dados. |
-| **Restrições**          | Verificação de dados deve ocorrer antes do início de qualquer missão autônoma. Tolerância de erro máxima para validação dos dados: 5%. |
-
-### Registrar Missões
-
-| **Nome do Caso de Uso** | Registrar Missões |
-|-------------------------|-------------------|
-| **Ator Principal**      | Operador          |
-| **Atores Secundários**  | Supervisor        |
-| **Resumo**              | O Operador define e registra novas missões, incluindo objetivos, rotas, parâmetros de segurança e restrições. |
-| **Pré-condições**       | Operador autenticado. Dados ambientais validados para a área da missão. Drones disponíveis e em estado operacional. |
-| **Pós-condições**       | Missão registrada no banco de dados. Drones programados e prontos para executar a missão. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Operador seleciona "Nova Missão" no painel de controle. | 2. Sistema exibe formulário de configuração de nova missão. |
-|                         | 3. Operador insere detalhes da missão (alvos, waypoints, parâmetros de voo). | 4. Sistema verifica conflitos da missão com zonas restritas ou restrições operacionais. |
-|                         | 5. Operador salva a missão. | 6. Sistema armazena dados da missão no banco de dados e sincroniza com os drones designados. |
-| **FLUXOS ALTERNATIVOS** | Missões de alto risco ou em áreas sensíveis exigem aprovação prévia do Supervisor antes do registro. |
-| **FLUXOS DE EXCEÇÃO**   | Waypoints inválidos ou rota não segura: Sistema bloqueia o salvamento da missão até que os erros sejam corrigidos. |
-| **Restrições**          | Missões devem incluir pelo menos 3 waypoints para definir uma rota válida. Nome da missão deve ser único no sistema para evitar conflitos. |
-
-### Consultar Versão Atual
-
-| **Nome do Caso de Uso** | Consultar Versão Atual |
-|-------------------------|------------------------|
-| **Ator Principal**      | Operador               |
-| **Atores Secundários**  | Supervisor             |
-| **Resumo**              | O Operador ou Supervisor verifica a versão instalada do software e firmware dos drones e do sistema de controle. |
-| **Pré-condições**       | Usuário autenticado no sistema. Sistema operacional do painel de controle estável. |
-| **Pós-condições**       | Versão atual do software e firmware exibida no painel de controle. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Operador seleciona "Sobre o Sistema" no menu de configurações. | 2. Sistema acessa dados de versão do software e firmware dos componentes. |
-|                         | 3. Operador visualiza detalhes da versão (ex: v2.1.5, build 1234). | 4. Sistema exibe histórico de atualizações recentes para referência. |
-| **FLUXOS ALTERNATIVOS** | Supervisor exporta relatório de versões para fins de auditoria e conformidade. |
-| **FLUXOS DE EXCEÇÃO**   | Dados de versão não encontrados ou corrompidos: Sistema solicita reinicialização do módulo afetado. |
-| **Restrições**          | Acesso restrito a usuários autorizados (Operador e Supervisor). Atualizações pendentes devem ser destacadas visualmente no painel. |
-
-### Atualizar para Novas Versões
-
-| **Nome do Caso de Uso** | Atualizar para Novas Versões |
-|-------------------------|------------------------------|
-| **Ator Principal**      | Operador                     |
-| **Atores Secundários**  | Supervisor                   |
-| **Resumo**              | O Operador aplica atualizações de software ou firmware nos drones e servidores de controle, garantindo compatibilidade e estabilidade. |
-| **Pré-condições**       | Operador autenticado. Conexão estável com o servidor de atualizações. Backup completo do sistema realizado antes da atualização. |
-| **Pós-condições**       | Nova versão do software/firmware instalada e operacional. Logs de atualização detalhados registrados para auditoria. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Operador seleciona "Verificar Atualizações" no painel de controle. | 2. Sistema busca e lista novas versões disponíveis no servidor de atualizações. |
-|                         | 3. Operador inicia o processo de instalação da atualização. | 4. Sistema valida a integridade dos arquivos de atualização e aplica a atualização nos componentes selecionados. |
-| **FLUXOS ALTERNATIVOS** | Atualização crítica: Requer confirmação e aprovação do Supervisor antes da instalação ser iniciada. |
-| **FLUXOS DE EXCEÇÃO**   | Falha na validação da integridade dos arquivos: Sistema reverte automaticamente para a versão anterior estável. |
-| **Restrições**          | Atualizações só podem ser aplicadas fora de missões ativas para evitar interrupções. Janela de tempo máxima para concluir o processo de atualização: 15 minutos. |
-
-### Restaurar Versão Anterior
-
-| **Nome do Caso de Uso** | Restaurar Versão Anterior |
-|-------------------------|---------------------------|
-| **Ator Principal**      | Operador                  |
-| **Atores Secundários**  | Supervisor                |
-| **Resumo**              | O Operador reverte o sistema para uma versão estável anterior em caso de falha na atualização ou instabilidade do sistema. |
-| **Pré-condições**       | Operador autenticado. Backup da versão anterior disponível e íntegro. Sistema em modo de recuperação ou manutenção. |
-| **Pós-condições**       | Versão anterior do software/firmware restaurada e funcional. Logs de restauração detalhados registrados para auditoria. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Operador seleciona "Histórico de Versões" ou "Restaurar Versão Anterior" no painel. | 2. Sistema lista as versões anteriores estáveis disponíveis para restauração. |
-|                         | 3. Operador escolhe uma versão para restaurar e confirma a ação. | 4. Sistema reinstala a versão selecionada e reinicia os serviços e componentes necessários. |
+| Nome do Caso de Uso | Restaurar Versão Anterior                                                                                                             |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Ator Principal       | Operador                                                                                                                               |
+| Atores Secundários   | Supervisor                                                                                                                             |
+| Resumo               | O Operador reverte o sistema para uma versão estável anterior em caso de falha na atualização ou instabilidade do sistema.        |
+| Pré-condições        | Operador autenticado. Backup da versão anterior disponível e íntegro. Sistema em modo de recuperação ou manutenção.               |
+| Pós-condições        | Versão anterior do software/firmware restaurada e funcional. Logs de restauração detalhados registrados para auditoria.           |
+| **FLUXO PRINCIPAL**  |                                                                                                                                      |
+| Ações do Ator       | 1. Operador seleciona "Histórico de Versões" ou "Restaurar Versão Anterior" no painel. 3. Operador escolhe uma versão para restaurar e confirma a ação. |
+| Ações do Sistema      | 2. Sistema lista as versões anteriores estáveis disponíveis para restauração. 4. Sistema reinstala a versão selecionada e reinicia os serviços e componentes necessários. |
 | **FLUXOS ALTERNATIVOS** | Restauração emergencial: Supervisor pode iniciar o processo de restauração remotamente sem confirmação do Operador em casos críticos. |
-| **FLUXOS DE EXCEÇÃO**   | Backup da versão anterior corrompido ou inacessível: Sistema notifica o erro e aborta o processo de restauração. |
-| **Restrições**          | Restauração bloqueada durante missões críticas para garantir a segurança operacional. Máximo de 3 restaurações por dia para evitar ciclos contínuos de rollback. |
+| **FLUXOS DE EXCEÇÃO**   | Backup da versão anterior corrompido ou inacessível: Sistema notifica o erro e aborta o processo de restauração.                     |
+| Restrições           | Restauração bloqueada durante missões críticas para garantir a segurança operacional. Máximo de 3 restaurações por dia para evitar ciclos contínuos de rollback. |
+| Observações          |                                                                                                                                      |
 
-### Administrar Banco de Dados
 
-| **Nome do Caso de Uso** | Administrar Banco de Dados |
-|-------------------------|----------------------------|
-| **Ator Principal**      | Supervisor                 |
-| **Atores Secundários**  | Nenhum                     |
-| **Resumo**              | O Supervisor realiza operações de manutenção no banco de dados, como backup, otimização, limpeza e auditoria de registros. |
-| **Pré-condições**       | Supervisor autenticado. Sistema fora de horário de pico de operações para minimizar o impacto. Permissões administrativas de acesso ao banco de dados concedidas. |
-| **Pós-condições**       | Banco de dados otimizado, backup gerado ou registros auditados. Logs de operação de administração do banco de dados registrados. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Supervisor seleciona "Gerenciar Banco de Dados" no painel administrativo. | 2. Sistema exibe opções de administração do banco de dados (backup, limpeza, otimização, auditoria). |
-|                         | 3. Supervisor escolhe a ação desejada e configura os parâmetros necessários. | 4. Sistema executa a operação de administração e confirma o resultado para o Supervisor. |
-| **FLUXOS ALTERNATIVOS** | Backup automático: Agendamento periódico de backups do banco de dados sem intervenção manual do Supervisor. |
-| **FLUXOS DE EXCEÇÃO**   | Falha na execução da operação: Sistema notifica o Supervisor e gera um relatório de erro detalhado. |
-| **Restrições**          | Operações de administração bloqueadas durante processos de atualização do sistema. Limite de 1TB para backups manuais para garantir o desempenho do sistema. |
+| Nome do Caso de Uso | Administrar Banco de Dados                                                                                                                        |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Ator Principal       | Supervisor                                                                                                                                       |
+| Atores Secundários   | Nenhum                                                                                                                                         |
+| Resumo               | O Supervisor realiza operações de manutenção no banco de dados, como backup, otimização, limpeza e auditoria de registros.                      |
+| Pré-condições        | Supervisor autenticado. Sistema fora de horário de pico de operações para minimizar o impacto. Permissões administrativas de acesso ao banco de dados concedidas. |
+| Pós-condições        | Banco de dados otimizado, backup gerado ou registros auditados. Logs de operação de administração do banco de dados registrados.                 |
+| **FLUXO PRINCIPAL**  |                                                                                                                                                |
+| Ações do Ator       | 1. Supervisor seleciona "Gerenciar Banco de Dados" no painel administrativo. 3. Supervisor escolhe a ação desejada e configura os parâmetros necessários.  |
+| Ações do Sistema      | 2. Sistema exibe opções de administração do banco de dados (backup, limpeza, otimização, auditoria). 4. Sistema executa a operação de administração e confirma o resultado para o Supervisor. |
+| **FLUXOS ALTERNATIVOS** | Backup automático: Agendamento periódico de backups do banco de dados sem intervenção manual do Supervisor.                                      |
+| **FLUXOS DE EXCEÇÃO**   | Falha na execução da operação: Sistema notifica o Supervisor e gera um relatório de erro detalhado.                                               |
+| Restrições           | Operações de administração bloqueadas durante processos de atualização do sistema. Limite de 1TB para backups manuais para garantir o desempenho do sistema. |
+| Observações          |                                                                                                                                                |
 
-### Realizar Manutenção
 
-| **Nome do Caso de Uso** | Realizar Manutenção |
-|-------------------------|---------------------|
-| **Ator Principal**      | Operador            |
-| **Atores Secundários**  | Supervisor          |
-| **Resumo**              | O Operador executa procedimentos de manutenção preventiva ou corretiva em drones e servidores do sistema. |
-| **Pré-condições**       | Operador autenticado. Sistema em modo de manutenção para evitar operações não planejadas. Ferramentas de diagnóstico e manutenção disponíveis. |
-| **Pós-condições**       | Componentes verificados, reparados ou substituídos. Logs de manutenção detalhados e atualizados no sistema. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Operador seleciona "Modo Manutenção" no painel de controle. | 2. Sistema desativa funções críticas operacionais e libera acesso técnico para manutenção. |
-|                         | 3. Operador realiza diagnósticos, testes ou ajustes nos componentes. | 4. Sistema registra todas as alterações realizadas e gera um relatório de manutenção. |
-| **FLUXOS ALTERNATIVOS** | Manutenção crítica: Requer aprovação prévia do Supervisor para intervenções que possam afetar a segurança ou disponibilidade do sistema. |
+| Nome do Caso de Uso | Realizar Manutenção                                                                                                                                |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ator Principal       | Operador                                                                                                                                     |
+| Atores Secundários   | Supervisor                                                                                                                                   |
+| Resumo               | O Operador executa procedimentos de manutenção preventiva ou corretiva em drones e servidores do sistema.                                     |
+| Pré-condições        | Operador autenticado. Sistema em modo de manutenção para evitar operações não planejadas. Ferramentas de diagnóstico e manutenção disponíveis. |
+| Pós-condições        | Componentes verificados, reparados ou substituídos. Logs de manutenção detalhados e atualizados no sistema.                                   |
+| **FLUXO PRINCIPAL**  |                                                                                                                                             |
+| Ações do Ator       | 1. Operador seleciona "Modo Manutenção" no painel de controle. 3. Operador realiza diagnósticos, testes ou ajustes nos componentes.         |
+| Ações do Sistema      | 2. Sistema desativa funções críticas operacionais e libera acesso técnico para manutenção. 4. Sistema registra todas as alterações realizadas e gera um relatório de manutenção. |
+| **FLUXOS ALTERNATIVOS** | Manutenção crítica: Requer aprovação prévia do Supervisor para intervenções que possam afetar a segurança ou disponibilidade do sistema.    |
 | **FLUXOS DE EXCEÇÃO**   | Falha no diagnóstico: Sistema notifica o Operador e sugere procedimentos de diagnóstico alternativos ou escalonamento para suporte técnico. |
-| **Restrições**          | Modo de manutenção bloqueado durante missões ativas para garantir a continuidade operacional. Tempo máximo por sessão de manutenção para garantir a disponibilidade do sistema: 1 hora. |
+| Restrições           | Modo de manutenção bloqueado durante missões ativas para garantir a continuidade operacional. Tempo máximo por sessão de manutenção para garantir a disponibilidade do sistema: 1 hora. |
+| Observações          |                                                                                                                                             |
 
-### Monitorar Sistema
 
-| **Nome do Caso de Uso** | Monitorar Sistema |
-|-------------------------|-------------------|
-| **Ator Principal**      | Operador          |
-| **Atores Secundários**  | Supervisor        |
-| **Resumo**              | O Operador acompanha em tempo real o status operacional de drones, servidores, rede de comunicação e outros componentes do sistema, identificando anomalias e eventos críticos. |
-| **Pré-condições**       | Operador autenticado. Sistema operacional estável e em funcionamento. Sensores e módulos de monitoramento ativos. |
-| **Pós-condições**       | Alertas gerados para eventos críticos ou anomalias detectadas. Dashboard de monitoramento atualizado continuamente com métricas e status dos componentes. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Operador acessa o dashboard de monitoramento no painel de controle. | 2. Sistema exibe status em tempo real de drones, servidores, latência da rede e carga do sistema. |
-|                         | 3. Operador configura alertas personalizados para métricas específicas de monitoramento. | 4. Sistema notifica o Operador em tempo real sobre desvios ou eventos críticos detectados. |
-| **FLUXOS ALTERNATIVOS** | Monitoramento remoto: Supervisor pode visualizar dados de monitoramento de qualquer local autorizado através de uma interface web. |
-| **FLUXOS DE EXCEÇÃO**   | Perda de conexão com um componente monitorado: Sistema armazena dados localmente e tenta reconectar, notificando o Operador sobre a perda temporária de dados. |
-| **Restrições**          | Taxa de atualização de dados no dashboard: a cada 2 segundos para garantir monitoramento em tempo real. Histórico de dados de monitoramento limitado a 48 horas para otimizar o armazenamento. |
+| Nome do Caso de Uso | Monitorar Sistema                                                                                                                   |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Ator Principal       | Operador                                                                                                                             |
+| Atores Secundários   | Supervisor                                                                                                                           |
+| Resumo               | O Operador acompanha em tempo real o status operacional de drones, servidores, rede de comunicação e outros componentes do sistema, identificando anomalias e eventos críticos.                |
+| Pré-condições        | Operador autenticado. Sistema operacional estável e em funcionamento. Sensores e módulos de monitoramento ativos.                                  |
+| Pós-condições        | Alertas gerados para eventos críticos ou anomalias detectadas. Dashboard de monitoramento atualizado continuamente com métricas e status dos componentes. |
+| **FLUXO PRINCIPAL**  |                                                                                                                                   |
+| Ações do Ator       | 1. Operador acessa o dashboard de monitoramento no painel de controle. 3. Operador configura alertas personalizados para métricas específicas de monitoramento.  |
+| Ações do Sistema      | 2. Sistema exibe status em tempo real de drones, servidores, latência da rede e carga do sistema. 4. Sistema notifica o Operador em tempo real sobre desvios ou eventos críticos detectados. |
+| **FLUXOS ALTERNATIVOS** | Monitoramento remoto: Supervisor pode visualizar dados de monitoramento de qualquer local autorizado através de uma interface web.                 |
+| **FLUXOS DE EXCEÇÃO**   | Perda de conexão com um componente monitorado: Sistema armazena dados localmente e tenta reconectar, notificando o Operador sobre a perda temporária de dados.       |
+| Restrições           | Taxa de atualização de dados no dashboard: a cada 2 segundos para garantir monitoramento em tempo real. Histórico de dados de monitoramento limitado a 48 horas para otimizar o armazenamento. |
+| Observações          |                                                                                                                                   |
 
-### Gerar Relatório do Sistema
 
-| **Nome do Caso de Uso** | Gerar Relatório do Sistema |
-|-------------------------|----------------------------|
-| **Ator Principal**      | Operador                   |
-| **Atores Secundários**  | Supervisor                 |
-| **Resumo**              | O Operador cria relatórios detalhados sobre missões, desempenho do sistema, falhas e auditoria para análise e conformidade. |
-| **Pré-condições**       | Operador autenticado. Dados históricos de missões e eventos do sistema disponíveis. Missões concluídas e registradas no sistema. |
-| **Pós-condições**       | Relatório gerado e exportado em formato padrão (PDF/CSV). Registro da geração do relatório nos logs de auditoria do sistema. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Operador seleciona "Gerar Relatório" no menu de relatórios. | 2. Sistema lista os tipos de relatórios disponíveis (missões, desempenho, auditoria, etc.). |
-|                         | 3. Operador define o período de tempo e parâmetros específicos para o relatório. | 4. Sistema compila os dados, gera o relatório e disponibiliza para download no formato selecionado. |
-| **FLUXOS ALTERNATIVOS** | Relatório automático: Agendamento periódico de geração e envio de relatórios por e-mail sem intervenção manual. |
-| **FLUXOS DE EXCEÇÃO**   | Dados insuficientes para o período selecionado: Sistema notifica o Operador e sugere ajustes no período ou parâmetros do relatório. |
-| **Restrições**          | Limite de 500 páginas por relatório para garantir a performance na geração. Exportação de relatórios bloqueada durante atualizações críticas do sistema. |
+| Nome do Caso de Uso | Gerar Relatório do Sistema                                                                                                       |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Ator Principal       | Operador                                                                                                                       |
+| Atores Secundários   | Supervisor                                                                                                                     |
+| Resumo               | O Operador cria relatórios detalhados sobre missões, desempenho do sistema, falhas e auditoria para análise e conformidade. |
+| Pré-condições        | Operador autenticado. Dados históricos de missões e eventos do sistema disponíveis. Missões concluídas e registradas no sistema. |
+| Pós-condições        | Relatório gerado e exportado em formato padrão (PDF/CSV). Registro da geração do relatório nos logs de auditoria do sistema.  |
+| **FLUXO PRINCIPAL**  |                                                                                                                            |
+| Ações do Ator       | 1. Operador seleciona "Gerar Relatório" no menu de relatórios. 3. Operador define o período de tempo e parâmetros específicos para o relatório.  |
+| Ações do Sistema      | 2. Sistema lista os tipos de relatórios disponíveis (missões, desempenho, auditoria, etc.). 4. Sistema compila os dados, gera o relatório e disponibiliza para download no formato selecionado. |
+| **FLUXOS ALTERNATIVOS** | Relatório automático: Agendamento periódico de geração e envio de relatórios por e-mail sem intervenção manual.             |
+| **FLUXOS DE EXCEÇÃO**   | Dados insuficientes para o período selecionado: Sistema notifica o Operador e sugere ajustes no período ou parâmetros do relatório.        |
+| Restrições           | Limite de 500 páginas por relatório para garantir a performance na geração. Exportação de relatórios bloqueada durante atualizações críticas do sistema. |
+| Observações          |                                                                                                                            |
 
-### Gerar Atualizações para o Software
 
-| **Nome do Caso de Uso** | Gerar Atualizações para o Software |
-|-------------------------|------------------------------------|
-| **Ator Principal**      | Supervisor                         |
-| **Atores Secundários**  | Equipe de Desenvolvimento          |
-| **Resumo**              | O Supervisor coordena a criação, validação e disponibilização de novas versões de software/firmware para o sistema. |
-| **Pré-condições**       | Supervisor autenticado com permissões administrativas. Ambiente de desenvolvimento configurado e funcional. Testes unitários e de integração da nova versão concluídos. |
-| **Pós-condições**       | Pacote de atualização gerado, assinado digitalmente e disponibilizado no servidor de atualizações. Documentação técnica da nova versão atualizada e publicada. |
-| **FLUXO PRINCIPAL**     | **Ações do Ator** | **Ações do Sistema** |
-|                         | 1. Supervisor aprova o código-fonte da nova versão após revisão. | 2. Sistema compila o código-fonte e empacota os arquivos da nova versão. |
-|                         | 3. Supervisor valida a nova versão em ambiente de teste (staging). | 4. Sistema registra a nova versão no catálogo de atualizações e libera para distribuição aos Operadores. |
-| **FLUXOS ALTERNATIVOS** | Atualizações emergenciais para correção de falhas críticas com processo de teste e validação reduzido. |
-| **FLUXOS DE EXCEÇÃO**   | Erro na compilação: Sistema gera log detalhado do erro para a equipe de desenvolvimento para correção. |
-| **Restrições**          | Versões devem seguir um padrão semântico de versionamento (ex: vX.Y.Z). Pacotes de atualização devem ser assinados digitalmente para garantir a integridade e autenticidade. |
+| Nome do Caso de Uso | Gerar Atualizações para o Software                                                                                                             |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ator Principal       | Supervisor                                                                                                                                   |
+| Atores Secundários   | Equipe de Desenvolvimento                                                                                                                  |
+| Resumo               | O Supervisor coordena a criação, validação e disponibilização de novas versões de software/firmware para o sistema.                         |
+| Pré-condições        | Supervisor autenticado com permissões administrativas. Ambiente de desenvolvimento configurado e funcional. Testes unitários e de integração da nova versão concluídos.   |
+| Pós-condições        | Pacote de atualização gerado, assinado digitalmente e disponibilizado no servidor de atualizações. Documentação técnica da nova versão atualizada e publicada.              |
+| **FLUXO PRINCIPAL**  |                                                                                                                                           |
+| Ações do Ator       | 1. Supervisor aprova o código-fonte da nova versão após revisão. 3. Supervisor valida a nova versão em ambiente de teste (staging).     |
+| Ações do Sistema      | 2. Sistema compila o código-fonte e empacota os arquivos da nova versão. 4. Sistema registra a nova versão no catálogo de atualizações e libera para distribuição aos Operadores. |
+| **FLUXOS ALTERNATIVOS** | Atualizações emergenciais para correção de falhas críticas com processo de teste e validação reduzido.                                       |
+| **FLUXOS DE EXCEÇÃO**   | Erro na compilação: Sistema gera log detalhado do erro para a equipe de desenvolvimento para correção.                                       |
+| Restrições           | Versões devem seguir um padrão semântico de versionamento (ex: vX.Y.Z). Pacotes de atualização devem ser assinados digitalmente para garantir a integridade e autenticidade. |
+| Observações          |                                                                                                                                           |
 
 
 # Diagrama de Sequência
