@@ -132,7 +132,7 @@ _&lt;Introdução do projeto&gt;_
 | Nome do Caso de Uso     | Executar Ataques                                                                                                                                                                                                                 |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Ator Principal          | Operador                                                                                                                                                                                                                         |
-| Atores Secundários      | Supervisor                                                                                                                                                                                                                       |
+| Atores Secundários      | Nenhum                                                                                                                                                                                                                       |
 | Resumo                  | O Operador inicia um ataque de precisão após a validação do alvo e autorização do Supervisor.                                                                                                                                    |
 | Pré-condições           | Operador autenticado. Alvo inimigo identificado e validado. Sistema de armamento do drone carregado e pronto.                                                                                                                    |
 | Pós-condições           | Ataque concluído. Logs da missão e do ataque registrados no sistema.                                                                                                                                                             |
@@ -162,7 +162,7 @@ _&lt;Introdução do projeto&gt;_
 | Nome do Caso de Uso     | Registrar Missões                                                                                                                                                                                                                                |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Ator Principal          | Operador                                                                                                                                                                                                                                         |
-| Atores Secundários      | Supervisor                                                                                                                                                                                                                                       |
+| Atores Secundários      | Nenhum                                                                                                                                                                                                                                       |
 | Resumo                  | O Operador define e registra novas missões, incluindo objetivos, rotas, parâmetros de segurança e restrições.                                                                                                                                    |
 | Pré-condições           | Operador autenticado. Dados ambientais validados para a área da missão. Drones disponíveis e em estado operacional.                                                                                                                              |
 | Pós-condições           | Missão registrada no banco de dados. Drones programados e prontos para executar a missão.                                                                                                                                                        |
@@ -177,7 +177,7 @@ _&lt;Introdução do projeto&gt;_
 | Nome do Caso de Uso     | Consultar Versão Atual                                                                                                                         |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | Ator Principal          | Operador                                                                                                                                       |
-| Atores Secundários      | Supervisor                                                                                                                                     |
+| Atores Secundários      | Nenhum                                                                                                                                     |
 | Resumo                  | O Operador ou Supervisor verifica a versão instalada do software e firmware dos drones e do sistema de controle.                               |
 | Pré-condições           | Usuário autenticado no sistema. Sistema operacional do painel de controle estável.                                                             |
 | Pós-condições           | Versão atual do software e firmware exibida no painel de controle.                                                                             |
@@ -206,8 +206,8 @@ _&lt;Introdução do projeto&gt;_
 
 | Nome do Caso de Uso     | Restaurar Versão Anterior                                                                                                                                                 |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ator Principal          | Operador                                                                                                                                                                  |
-| Atores Secundários      | Supervisor                                                                                                                                                                |
+| Ator Principal          | Supervisor                                                                                                                                                                  |
+| Atores Secundários      | Operador                                                                                                                                                                |
 | Resumo                  | O Operador reverte o sistema para uma versão estável anterior em caso de falha na atualização ou instabilidade do sistema.                                                |
 | Pré-condições           | Operador autenticado. Backup da versão anterior disponível e íntegro. Sistema em modo de recuperação ou manutenção.                                                       |
 | Pós-condições           | Versão anterior do software/firmware restaurada e funcional. Logs de restauração detalhados registrados para auditoria.                                                   |
@@ -236,8 +236,8 @@ _&lt;Introdução do projeto&gt;_
 
 | Nome do Caso de Uso     | Realizar Manutenção                                                                                                                                                                     |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ator Principal          | Operador                                                                                                                                                                                |
-| Atores Secundários      | Supervisor                                                                                                                                                                              |
+| Ator Principal          | Supervisor                                                                                                                                                                                |
+| Atores Secundários      | Nenhum                                                                                                                                                                              |
 | Resumo                  | O Operador executa procedimentos de manutenção preventiva ou corretiva em drones e servidores do sistema.                                                                               |
 | Pré-condições           | Operador autenticado. Sistema em modo de manutenção para evitar operações não planejadas. Ferramentas de diagnóstico e manutenção disponíveis.                                          |
 | Pós-condições           | Componentes verificados, reparados ou substituídos. Logs de manutenção detalhados e atualizados no sistema.                                                                             |
@@ -266,8 +266,8 @@ _&lt;Introdução do projeto&gt;_
 
 | Nome do Caso de Uso     | Gerar Relatório do Sistema                                                                                                                                                                      |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ator Principal          | Operador                                                                                                                                                                                        |
-| Atores Secundários      | Supervisor                                                                                                                                                                                      |
+| Ator Principal          | Supervisor                                                                                                                                                                                        |
+| Atores Secundários      | Nenhum                                                                                                                                                                                      |
 | Resumo                  | O Operador cria relatórios detalhados sobre missões, desempenho do sistema, falhas e auditoria para análise e conformidade.                                                                     |
 | Pré-condições           | Operador autenticado. Dados históricos de missões e eventos do sistema disponíveis. Missões concluídas e registradas no sistema.                                                                |
 | Pós-condições           | Relatório gerado e exportado em formato padrão (PDF/CSV). Registro da geração do relatório nos logs de auditoria do sistema.                                                                    |
@@ -282,7 +282,7 @@ _&lt;Introdução do projeto&gt;_
 | Nome do Caso de Uso     | Gerar Atualizações para o Software                                                                                                                                                |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Ator Principal          | Supervisor                                                                                                                                                                        |
-| Atores Secundários      | Equipe de Desenvolvimento                                                                                                                                                         |
+| Atores Secundários      | Nenhum                                                                                                                                                         |
 | Resumo                  | O Supervisor coordena a criação, validação e disponibilização de novas versões de software/firmware para o sistema.                                                               |
 | Pré-condições           | Supervisor autenticado com permissões administrativas. Ambiente de desenvolvimento configurado e funcional. Testes unitários e de integração da nova versão concluídos.           |
 | Pós-condições           | Pacote de atualização gerado, assinado digitalmente e disponibilizado no servidor de atualizações. Documentação técnica da nova versão atualizada e publicada.                    |
@@ -290,7 +290,7 @@ _&lt;Introdução do projeto&gt;_
 | Ações do Ator           | 1. Supervisor aprova o código-fonte da nova versão após revisão. 3. Supervisor valida a nova versão em ambiente de teste (staging).                                               |
 | Ações do Sistema        | 2. Sistema compila o código-fonte e empacota os arquivos da nova versão. 4. Sistema registra a nova versão no catálogo de atualizações e libera para distribuição aos Operadores. |
 | **FLUXOS ALTERNATIVOS** | Atualizações emergenciais para correção de falhas críticas com processo de teste e validação reduzido.                                                                            |
-| **FLUXOS DE EXCEÇÃO**   | Erro na compilação: Sistema gera log detalhado do erro para a equipe de desenvolvimento para correção.                                                                            |
+| **FLUXOS DE EXCEÇÃO**   | Erro na compilação: Sistema gera log detalhado do erro para correção.                                                                            |
 | Restrições              | Versões devem seguir um padrão semântico de versionamento (ex: vX.Y.Z). Pacotes de atualização devem ser assinados digitalmente para garantir a integridade e autenticidade.      |
 | Observações             |                                                                                                                                                                                   |
 
