@@ -1,0 +1,38 @@
+@startuml
+title Autenticar com biometria e múltiplos fatores
+
+actor Operador
+participant "Sistema Falcão Sombrio" as SFS
+participant "Sistema Autenticação Biométrica" as SAB
+participant "Sistema Autenticação Multifator" as SAM
+
+Operador -> SFS : solicitaAcesso()
+activate SFS
+
+SFS -> Operador : solicitaDadosBiometricos()
+Operador -> SFS : forneceDadosBiometricos(dadosBio)
+SFS -> SAB : verificaDados(dadosBio)
+activate SAB
+SAB --> SFS : resultadoVerificacaoBio(sucesso)
+deactivate SAB
+
+alt Verificação Biométrica bem-sucedida
+    SFS -> Operador : solicitaCodigoMFA()
+    Operador -> SFS : forneceCodigoMFA(codigo)
+    SFS -> SAM : verificaCodigo(codigo)
+    activate SAM
+    SAM --> SFS : resultadoVerificacaoMFA(sucesso)
+    deactivate SAM
+
+    alt Verificação MFA bem-sucedida
+        SFS --> Operador : acessoConcedido()
+    else MFA falhou
+        SFS --> Operador : acessoNegado("Falha MFA")
+    end
+else Verificação Biométrica falhou
+    SFS --> Operador : acessoNegado("Falha Biometria")
+end
+
+deactivate SFS
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+title Gerar Relatório do Sistema
+
+actor Supervisor
+participant "Sistema de Relatórios" as SR
+participant "Banco de Dados de Missões e Eventos" as BD
+participant "Sistema de Auditoria" as SA
+
+Supervisor -> SR : selecionaGerarRelatorio()
+SR -> Supervisor : exibeTiposDeRelatorio()
+Supervisor -> SR : defineParametrosRelatorio()
+SR -> BD : coletaDadosHistoricos()
+SR -> SA : coletaDadosDeAuditoria()
+SR -> SR : geraRelatorio()
+SR -> Supervisor : disponibilizaRelatorio()
+
+alt Relatório Automático
+    SR -> Supervisor : enviaRelatorioPorEmail()
+end
+
+alt Dados Insuficientes
+    SR -> Supervisor : notificaDadosInsuficientes()
+    SR -> Supervisor : sugereAjustesNoPeriodo()
+end
+
+@enduml

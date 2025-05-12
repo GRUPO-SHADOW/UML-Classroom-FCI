@@ -294,7 +294,21 @@ _&lt;Introdução do projeto&gt;_
 
 # Diagrama de Sequência
 
-_&lt;Diagrama de ordem e interação dos objetos&gt;_
+![versao](../src/versao.png)
+![autenticar](../src/autenticar.png)
+![navegacao](../src/navegacao.png)
+![manual](../src/manual.png)
+![automatico](../src/automatico.png)
+![ataques](../src/ataques.png)
+![ambientais](../src/ambientais.png)
+![registrar](../src/registrar.png)
+![atualizar](../src/atualizar.png)
+![restaurar](../src/restaurar.png)
+![banco](../src/banco.png)
+![relatorio](../src/relatorio.png)
+![monitorar](../src/monitorar.png)
+![manutencao](../src/manutencao.png)
+![gerar](../src/gerar.png)
 
 # Diagrama de Classes
 

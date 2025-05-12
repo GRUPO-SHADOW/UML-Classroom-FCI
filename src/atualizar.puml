@@ -1,0 +1,32 @@
+@startuml
+title Atualizar para Novas Versões
+
+actor Operador
+actor Supervisor
+participant "Sistema de Controle" as SC
+participant "Servidor de Atualizações" as SA
+
+Operador -> SC : selecionaVerificarAtualizacoes()
+SC -> SA : buscaNovasVersoes()
+
+alt Atualizações encontradas
+    SC -> Operador : exibeListaAtualizacoes()
+    Operador -> SC : iniciaInstalacaoAtualizacao()
+    SC -> SA : validaIntegridadeArquivos()
+    alt Integridade válida
+        SC -> SA : aplicaAtualizacao()
+        SA -> SC : confirmaAtualizacao()
+    else Falha na integridade
+        SC -> SA : reverteParaVersaoAnterior()
+        SC -> Operador : alertaErro("Falha na validação da integridade")
+    end
+else Nenhuma atualização
+    SC -> Operador : alertaInfo("Nenhuma atualização disponível")
+end
+
+alt Atualização crítica
+    Supervisor -> SC : aprovaAtualizacao()
+    SC -> Operador : confirmaInicioAtualizacao()
+end
+
+@enduml

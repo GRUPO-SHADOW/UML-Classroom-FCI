@@ -1,0 +1,35 @@
+@startuml
+title Monitorar Sistema
+
+actor Operador
+actor Supervisor
+participant "Sistema de Monitoramento" as SM
+participant "Drones/Servidores" as DS
+participant "Rede de Comunicação" as RC
+
+Operador -> SM : acessaDashboard()
+SM -> DS : coletaStatusDrones()
+SM -> RC : coletaLatenciaRede()
+SM -> SM : coletaCargaSistema()
+SM -> Operador : exibeStatusEmTempoReal()
+
+Operador -> SM : configuraAlertasPersonalizados()
+SM -> Operador : confirmaConfiguracaoAlertas()
+
+SM -> Operador : notificaEventosCriticos()
+
+
+alt Monitoramento Remoto
+    Supervisor -> SM : acessaDashboardRemoto()
+    SM -> Supervisor : exibeStatusEmTempoReal()
+end
+
+
+alt Perda de Conexão
+    SM -> DS : tentaReconectar()
+    SM -> Operador : notificaPerdaDeConexao()
+    SM -> SM : armazenaDadosLocalmente()
+end
+
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+title Executar Ataques
+
+actor Operador
+actor Supervisor
+participant "Sistema de Armamento" as SA
+participant "Drone" as Drone
+
+Operador -> SA : selecionaAlvo()
+SA -> SA : verificaDisponibilidadeArmamento()
+
+alt Armamento disponível
+    Operador -> SA : solicitaAutorizacaoAtaque()
+    SA -> Supervisor : enviaSolicitacaoAutorizacao()
+    Supervisor -> SA : autorizaAtaque()
+    SA -> Drone : executaAtaque()
+    Drone -> Drone : realizaAtaque()
+    SA -> Operador : confirmaResultado()
+else Armamento indisponível
+    SA -> Operador : alertaErro("Armamento não disponível")
+end
+
+alt Ataque automático por IA (em emergência)
+    SA -> Drone : executaAtaqueAutomatico()
+    Drone -> Drone : realizaAtaque()
+end
+
+alt Perda de comunicação durante o ataque
+    SA -> Drone : abortaAtaque()
+    SA -> Drone : retornaBase()
+end
+
+@enduml

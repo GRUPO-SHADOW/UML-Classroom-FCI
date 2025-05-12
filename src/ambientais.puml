@@ -1,0 +1,27 @@
+@startuml
+title Verificar Dados Ambientais
+
+actor Operador
+actor Supervisor
+participant "Sistema de Sensores" as SS
+participant "Drone" as Drone
+
+Operador -> SS : selecionaVerificarDados()
+SS -> Drone : coletaDadosSensores()
+
+alt Dados coletados
+    SS -> SS : comparaComPadroesQualidade()
+    alt Dados válidos
+        SS -> Operador : atualizaStatusDados("válidos")
+    else Dados inválidos
+        SS -> Operador : alertaErro("Dados inválidos")
+        alt Supervisor revisa
+            Supervisor -> SS : validaDadosCriticos()
+            SS -> Operador : atualizaStatusDados("válidos")
+        end
+    end
+else Falha na coleta
+    SS -> Operador : alertaErro("Falha na coleta do sensor")
+end
+
+@enduml

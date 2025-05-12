@@ -1,0 +1,25 @@
+@startuml
+title Administrar Banco de Dados
+
+actor Supervisor
+participant "Sistema Administrativo" as SA
+participant "Banco de Dados" as BD
+
+Supervisor -> SA : selecionaGerenciarBancoDeDados()
+SA -> Supervisor : exibeOpcoesAdministracao()
+Supervisor -> SA : escolheAcao(administrarBD)
+SA -> BD : executaOperacao(backup/limpeza/otimizacao/auditoria)
+BD -> SA : confirmaOperacao()
+SA -> Supervisor : exibeResultado()
+
+
+Supervisor -> SA : solicitaBackupAutomatico()
+SA -> BD : agendaBackupAutomatico()
+BD -> SA : confirmaAgendamentoBackup()
+
+
+alt Operações bloqueadas
+    SA -> Supervisor : alertaErro("Operações bloqueadas durante atualização do sistema")
+end
+
+@enduml

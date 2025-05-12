@@ -1,0 +1,26 @@
+@startuml
+title Navegar Automaticamente
+
+actor Operador
+participant "Sistema de Navegação" as SN
+participant "Drone" as Drone
+
+Operador -> SN : selecionaNavegacaoAutonoma()
+SN -> SN : validaDadosSensores()
+SN -> SN : validaWaypoints()
+
+alt Dados válidos
+    SN -> SN : calculaTrajetoriaOtimizadas()
+    SN -> Drone : iniciaNavegacaoAutonoma()
+else Dados inválidos
+    SN -> Operador : alertaErro("Dados de sensores inconsistentes")
+    SN -> Drone : solicitaRecalibracaoSensores()
+end
+
+alt Ajuste de rota em tempo real
+    Operador -> SN : enviaComandoAjusteRota()
+    SN -> SN : recalculaTrajetoria()
+    SN -> Drone : ajustaRota()
+end
+
+@enduml

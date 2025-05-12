@@ -1,0 +1,26 @@
+@startuml
+title Habilitar Controle Manual
+
+actor Operador
+actor Supervisor
+participant "Sistema de Controle" as SC
+participant Drone
+
+
+Operador -> SC : selecionaControleManual()
+SC -> SC : verificaConexaoComDrone()
+
+alt Conexão OK
+    SC -> SC : desativaIANavegacao()
+    SC -> Operador : habilitaControlesManuais()
+else Falha na conexão
+    SC -> Operador : alertaErro("Falha na conexão com o drone")
+    SC -> Drone : mantémModoAutonomo()
+end
+
+alt Supervisor aprova
+    Supervisor -> SC : aprovaMudanca()
+    SC -> Operador : confirmaMudancaModo()
+end
+
+@enduml

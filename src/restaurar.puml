@@ -1,0 +1,30 @@
+@startuml
+title Restaurar Versão Anterior
+
+actor Supervisor
+actor Operador
+participant "Sistema de Controle" as SC
+participant "Servidor de Backup" as SB
+
+Supervisor -> SC : selecionaRestaurarVersao()
+SC -> SB : listaVersoesDisponiveis()
+alt Versões disponíveis
+    SC -> Supervisor : exibeListaVersoes()
+    Supervisor -> SC : escolheVersaoRestaurar()
+    SC -> SB : reinstalaVersaoSelecionada()
+    SB -> SC : confirmaRestauracao()
+    SC -> Operador : notificaRestauraçãoCompleta()
+else Nenhuma versão disponível
+    SC -> Supervisor : alertaErro("Nenhuma versão disponível para restauração")
+end
+
+alt Restauração emergencial
+    Supervisor -> SC : iniciaRestauracaoRemota()
+    SC -> SB : reinstalaVersaoRemota()
+end
+
+alt Falha no backup
+    SC -> Supervisor : alertaErro("Backup corrompido ou inacessível")
+end
+
+@enduml

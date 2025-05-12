@@ -1,0 +1,26 @@
+@startuml
+title Gerar Atualizações para o Software
+
+actor Supervisor
+participant "Sistema de Compilação" as SC
+participant "Ambiente de Teste (Staging)" as AT
+participant "Catálogo de Atualizações" as CA
+
+Supervisor -> SC : aprovaCodigoFonte()
+SC -> SC : compilaCodigoFonte()
+SC -> SC : empacotaArquivosDaVersao()
+SC -> AT : validaVersaoNoAmbienteDeTeste()
+AT -> SC : confirmaValidacao()
+SC -> CA : registraNovaVersao()
+SC -> Supervisor : liberaVersaoParaDistribuicao()
+
+alt Atualizacao Emergencial
+    SC -> SC : reduzProcessoDeTeste()
+    SC -> CA : registraVersaoEmergencial()
+end
+
+alt Erro na Compilacao
+    SC -> Supervisor : geraLogDetalhadoDoErro()
+end
+
+@enduml

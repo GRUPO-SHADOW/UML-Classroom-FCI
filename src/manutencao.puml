@@ -1,0 +1,22 @@
+@startuml
+title Realizar Manutenção
+
+actor Supervisor
+participant "Sistema de Controle" as SC
+participant "Drones/Servidores" as DS
+
+Supervisor -> SC : selecionaModoManutencao()
+SC -> DS : desativaFuncoesCriticas()
+SC -> Supervisor : liberaAcessoTecnico()
+
+Supervisor -> DS : realizaDiagnosticosOuAjustes()
+DS -> SC : registraAlteracoes()
+SC -> Supervisor : geraRelatorioManutencao()
+
+alt Falha no Diagnóstico
+    DS -> Supervisor : alertaFalhaDiagnostico()
+    Supervisor -> SC : solicitaDiagnosticoAlternativo()
+end
+
+
+@enduml

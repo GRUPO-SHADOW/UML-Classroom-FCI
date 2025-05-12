@@ -1,0 +1,31 @@
+@startuml
+title Registrar Missões
+
+actor Operador
+actor Supervisor
+participant "Sistema de Missões" as SM
+participant Drone
+
+Operador -> SM : selecionaNovaMissao()
+SM -> SM : exibeFormularioConfiguracao()
+
+alt Missão com dados válidos
+    Operador -> SM : insereDetalhesMissao()
+    SM -> SM : verificaConflitosMissao()
+    alt Conflitos encontrados
+        SM -> Operador : alertaErro("Conflitos com zonas restritas")
+    else Sem conflitos
+        SM -> Operador : salvaMissao()
+        SM -> SM : armazenaDadosBanco()
+        SM -> Drone : sincronizaDrones()
+    end
+else Missão de alto risco
+    Supervisor -> SM : aprovaMissao()
+    SM -> Operador : salvaMissao()
+end
+
+alt Waypoints inválidos
+    SM -> Operador : alertaErro("Waypoints inválidos")
+end
+
+@enduml

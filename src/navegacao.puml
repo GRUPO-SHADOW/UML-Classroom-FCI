@@ -1,0 +1,48 @@
+@startuml
+title Gerenciar Navegação
+
+actor Operador
+actor Supervisor
+participant "Sistema de Navegação Inteligente" as SNI
+participant Drone
+
+loop Monitoramento Contínuo
+    Drone -> SNI : enviaDadosSensor(LIDAR, câmeras, GPS)
+    SNI -> SNI : processaDadosAmbientais()
+    SNI -> SNI : detectaObstaculos()
+
+    alt Obstáculo detectado
+        SNI -> SNI : calculaNovaRota()
+        SNI -> Drone : enviaComandos(novaRota)
+        Drone -> Drone : ajustaTrajetoria()
+    else Sem obstáculos
+        SNI -> Drone : enviaComandos(manterRota)
+    end
+    SNI -> SNI : monitoraRotaECondicoes()
+end
+
+alt Ameaça detectada
+    SNI -> SNI : calculaRotaEvasao()
+    SNI -> Drone : enviaComandos(rotaEvasao)
+    Drone -> Drone : ajustaTrajetoria()
+end
+
+alt Condições climáticas adversas
+    SNI -> SNI : adaptaRotaParaSeguranca()
+    SNI -> Drone : enviaComandos(novaRotaAdaptada)
+end
+
+alt Perda de comunicação com Central de Controle
+    SNI -> SNI : ativaProtocoloOperacaoAutonoma()
+    SNI -> Drone : enviaComandos(rotaSeguraEmergencia)
+end
+
+alt Falha de sensor no drone
+    SNI -> SNI : utilizaDadosSensoresRedundantes()
+end
+
+alt Perda de comunicação com drone
+    SNI -> SNI : ativaProtocoloRetornoOuPouso()
+end
+
+@enduml
