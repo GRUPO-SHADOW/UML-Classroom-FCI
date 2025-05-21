@@ -312,7 +312,11 @@ _&lt;Introdução do projeto&gt;_
 
 # Diagrama de Classes
 
-_&lt;Diagrama de relacionamento entre classes para os seus atributos e operações&gt;_
+[Diagrama Classes Principal](./diagrama_classes_principal.png)
+[Subsistema Armamento](./diagrama_subsistema_armamento.png)
+[Subsistema Autenticação](./diagrama_subsistema_autenticacao.png)
+[Subsistema Monitoramento](./diagrama_subsistema_monitoramento.png)
+[Subsistema Navegação](./diagrama_subsistema_navegacao.png)
 
 # Diagrama de Estados
 
