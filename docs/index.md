@@ -330,7 +330,7 @@ _&lt;Introdução do projeto&gt;_
 
 # Diagrama de Implantação
 
-_&lt;Diagrama para exibir o relacionamento de hardware e software no projeto&gt;_
+![diagrama_implantacao](./diagrama-implantacao.png)
 
 # Referências
 
