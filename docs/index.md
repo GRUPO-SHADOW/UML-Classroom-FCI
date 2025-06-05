@@ -312,9 +312,13 @@ O projeto visa desenvolver uma plataforma de comando e controle para drones bél
 
 # Diagrama de Classes
 ![Diagrama Classes Principal](./diagrama_classes_principal.png)  
+
 ![Subsistema Armamento](./diagrama_subsistema_armamento.png)  
+
 ![Subsistema Autenticação](./diagrama_subsistema_autenticacao.png)  
+
 ![Subsistema Monitoramento](./diagrama_subsistema_monitoramento.png)  
+
 ![Subsistema Navegação](./diagrama_subsistema_navegacao.png)
 
 # Diagrama de Estados
