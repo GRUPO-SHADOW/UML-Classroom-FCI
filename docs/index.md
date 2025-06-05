@@ -334,4 +334,9 @@ O projeto visa desenvolver uma plataforma de comando e controle para drones bél
 
 # Referências
 
-_&lt;Lista de referências&gt;_
+[Visão geral do JDBC](https://www.geeksforgeeks.org/introduction-to-jdbc/)
+[Visão geral do ODBC](https://www.geeksforgeeks.org/odbc-full-form/)
+[Explicação sobre MQTT com TLS/SSL](https://www.hivemq.com/blog/mqtt-security-fundamentals-tls-ssl/)
+[Elementos e transições em diagramas de estado](https://www.geeksforgeeks.org/unified-modeling-language-uml-state-diagrams/)
+[Fluxo de mensagens em diagramas de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
+
