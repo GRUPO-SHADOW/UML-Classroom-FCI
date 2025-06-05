@@ -312,13 +312,9 @@ O projeto visa desenvolver uma plataforma de comando e controle para drones bél
 
 # Diagrama de Classes
 ![Diagrama Classes Principal](./diagrama_classes_principal.png)  
-
 ![Subsistema Armamento](./diagrama_subsistema_armamento.png)  
-
 ![Subsistema Autenticação](./diagrama_subsistema_autenticacao.png)  
-
 ![Subsistema Monitoramento](./diagrama_subsistema_monitoramento.png)  
-
 ![Subsistema Navegação](./diagrama_subsistema_navegacao.png)
 
 # Diagrama de Estados
@@ -329,9 +325,6 @@ O projeto visa desenvolver uma plataforma de comando e controle para drones bél
 ![missao_estados](./missao_estados.png)
 ![navegacao_estados](./navegacao_estados.png)
 
-
-
-
 # Diagrama de Implantação
 
 ![diagrama_implantacao](./diagrama-implantacao.png)
@@ -339,8 +332,12 @@ O projeto visa desenvolver uma plataforma de comando e controle para drones bél
 # Referências
 
 [Visão geral do JDBC](https://www.geeksforgeeks.org/introduction-to-jdbc/)
+
 [Visão geral do ODBC](https://www.geeksforgeeks.org/odbc-full-form/)
+
 [Explicação sobre MQTT com TLS/SSL](https://www.hivemq.com/blog/mqtt-security-fundamentals-tls-ssl/)
+
 [Elementos e transições em diagramas de estado](https://www.geeksforgeeks.org/unified-modeling-language-uml-state-diagrams/)
+
 [Fluxo de mensagens em diagramas de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
