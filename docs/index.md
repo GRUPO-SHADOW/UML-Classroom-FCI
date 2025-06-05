@@ -28,7 +28,7 @@ _&lt;Sistema Falcão Sombrio&gt;_
 
 # Descrição do Projeto
 
-_&lt;Introdução do projeto&gt;_
+O projeto visa desenvolver uma plataforma de comando e controle para drones bélicos. O sistema permite o monitoramento em tempo real dos drones, controle remoto e autônomo, e planejamento de missões através de uma interface gráfica. Incorpora navegação inteligente baseada em IA para otimização de rotas e desvio de obstáculos, autenticação multifator e biométrica para operadores, criptografia de comunicações e dados, e funcionalidades robustas para gerenciamento de missões, registro de logs, atualizações de software, e manutenção. O sistema é projetado para alta disponibilidade e escalabilidade e conformidade regulatória.
 
 # Análise de Requisitos Funcionais e Não-Funcionais
 
